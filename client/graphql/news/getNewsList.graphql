@@ -1,0 +1,22 @@
+query GetNewsList {
+    krBoardList: getNewsList(filter: { flag: KR }) {
+        ...getNewsListFields
+    }
+    jpBoardList: getNewsList(filter: { flag: JP }) {
+        ...getNewsListFields
+    }
+    usBoardList: getNewsList(filter: { flag: US }) {
+        ...getNewsListFields
+    }
+}
+
+fragment getNewsListFields on GetNewsListResponse {
+    id
+    title
+    content
+    press
+    data
+    url
+    portal
+    flag
+}

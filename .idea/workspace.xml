@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:pagination" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="499afb60-68aa-4cb9-a7b9-7d22d53381a3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker/mysql/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker/mysql/data/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker/mysql/mysql.cnf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker/redis/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker/redis/data/.gitkeep" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript JSX File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1hTt9dhr0UqrB5nThB3pf0AAglE" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="js.linters.configure.manually.selectedeslint" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/client/node_modules/prettier" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/server/node_modules/typescript/lib" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/server/src/notice/dto" />
+      <recent name="$PROJECT_DIR$/docker" />
+      <recent name="$PROJECT_DIR$/docker/mysql/data" />
+      <recent name="$PROJECT_DIR$/server" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/server/src/notice" />
+      <recent name="$PROJECT_DIR$/server/src/notice/dto" />
+      <recent name="$PROJECT_DIR$/server/src/notice/repositories" />
+      <recent name="$PROJECT_DIR$/server/src/notice/entities" />
+      <recent name="$PROJECT_DIR$/server/src/auth/repositories" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="499afb60-68aa-4cb9-a7b9-7d22d53381a3" name="Default Changelist" comment="" />
+      <created>1600046760086</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1600046760086</updated>
+      <workItem from="1600046761284" duration="25873000" />
+      <workItem from="1600087732705" duration="15729000" />
+      <workItem from="1600147410363" duration="84955000" />
+      <workItem from="1600381742581" duration="18052000" />
+      <workItem from="1600478824441" duration="3414000" />
+      <workItem from="1600512540510" duration="9660000" />
+      <workItem from="1600748974151" duration="24371000" />
+      <workItem from="1600821288804" duration="101000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="pagination" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="3780" y="531" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1600764519101">
+      <screen x="0" y="23" width="5120" height="1417" />
+    </state>
+    <state x="3780" y="531" key="#com.intellij.fileTypes.FileTypeChooser/0.23.5120.1417@0.23.5120.1417" timestamp="1600764519101" />
+    <state x="3847" y="454" key="#com.intellij.ide.util.MemberChooser" timestamp="1600067123245">
+      <screen x="0" y="23" width="5120" height="1417" />
+    </state>
+    <state x="3847" y="454" key="#com.intellij.ide.util.MemberChooser/0.23.5120.1417@0.23.5120.1417" timestamp="1600067123245" />
+    <state x="2979" y="129" width="1666" height="1200" key="DiffContextDialog" timestamp="1600764354694">
+      <screen x="0" y="23" width="5120" height="1417" />
+    </state>
+    <state x="2979" y="129" width="1666" height="1200" key="DiffContextDialog/0.23.5120.1417@0.23.5120.1417" timestamp="1600764354694" />
+    <state x="3822" y="521" key="FileChooserDialogImpl" timestamp="1600778601033">
+      <screen x="0" y="23" width="5120" height="1417" />
+    </state>
+    <state x="3822" y="521" key="FileChooserDialogImpl/0.23.5120.1417@0.23.5120.1417" timestamp="1600778601033" />
+    <state width="2073" height="404" key="GridCell.Tab.0.bottom" timestamp="1600065690895">
+      <screen x="0" y="23" width="5120" height="1417" />
+    </state>
+    <state width="2073" height="404" key="GridCell.Tab.0.bottom/0.23.5120.1417@0.23.5120.1417" timestamp="1600065690895" />
+    <state width="2073" height="404" key="GridCell.Tab.0.center" timestamp="1600065690895">
+      <screen x="0" y="23" width="5120" height="1417" />
+    </state>
+    <state width="2073" height="404" key="GridCell.Tab.0.center/0.23.5120.1417@0.23.5120.1417" timestamp="1600065690895" />
+    <state width="2073" height="404" key="GridCell.Tab.0.left" timestamp="1600065690894">
+      <screen x="0" y="23" width="5120" height="1417" />
+    </state>
+    <state width="2073" height="404" key="GridCell.Tab.0.left/0.23.5120.1417@0.23.5120.1417" timestamp="1600065690894" />
+    <state width="2073" height="404" key="GridCell.Tab.0.right" timestamp="1600065690895">
+      <screen x="0" y="23" width="5120" height="1417" />
+    </state>
+    <state width="2073" height="404" key="GridCell.Tab.0.right/0.23.5120.1417@0.23.5120.1417" timestamp="1600065690895" />
+    <state x="3543" y="370" key="SettingsEditor" timestamp="1600087769841">
+      <screen x="0" y="23" width="5120" height="1417" />
+    </state>
+    <state x="3543" y="370" key="SettingsEditor/0.23.5120.1417@0.23.5120.1417" timestamp="1600087769841" />
+    <state x="2979" y="129" width="1666" height="1200" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1600764354695">
+      <screen x="0" y="23" width="5120" height="1417" />
+    </state>
+    <state x="2979" y="129" width="1666" height="1200" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.23.5120.1417@0.23.5120.1417" timestamp="1600764354695" />
+    <state x="3845" y="648" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1600084103738">
+      <screen x="0" y="23" width="5120" height="1417" />
+    </state>
+    <state x="3845" y="648" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.5120.1417@0.23.5120.1417" timestamp="1600084103738" />
+    <state x="2691" y="123" width="2158" height="1217" key="dock-window-1" timestamp="1600279115169">
+      <screen x="0" y="23" width="5120" height="1417" />
+    </state>
+    <state x="2691" y="123" width="2158" height="1217" key="dock-window-1/0.23.5120.1417@0.23.5120.1417" timestamp="1600279115169" />
+    <state x="3742" y="469" width="584" height="580" key="find.popup" timestamp="1600778790613">
+      <screen x="0" y="23" width="5120" height="1417" />
+    </state>
+    <state x="3742" y="469" width="584" height="580" key="find.popup/0.23.5120.1417@0.23.5120.1417" timestamp="1600778790613" />
+    <state x="3699" y="348" width="670" height="676" key="search.everywhere.popup" timestamp="1600786255860">
+      <screen x="0" y="23" width="5120" height="1417" />
+    </state>
+    <state x="3699" y="348" width="670" height="676" key="search.everywhere.popup/0.23.5120.1417@0.23.5120.1417" timestamp="1600786255860" />
+    <state x="3542" y="567" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1600778902538">
+      <screen x="0" y="23" width="5120" height="1417" />
+    </state>
+    <state x="3542" y="567" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.23.5120.1417@0.23.5120.1417" timestamp="1600778902538" />
+  </component>
+</project>

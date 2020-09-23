@@ -1,0 +1,33 @@
+query getBoardList($after: Float, $first: Float, $search: String, $category: BoardCategory) {
+    getBoardList(after: $after, first: $first, search: $search, category: $category) {
+        edges {
+            cursor
+            node {
+                id
+                title
+                desc
+                view
+                category
+                createdAt
+                updatedAt
+                user {
+                    id
+                    username
+                    email
+                    avatar
+                }
+                comments {
+                    id
+                }
+                likes {
+                    id
+                }
+            }
+        }
+        pageInfo {
+            hasNextPage
+            startCursor
+            endCursor
+        }
+    }
+}

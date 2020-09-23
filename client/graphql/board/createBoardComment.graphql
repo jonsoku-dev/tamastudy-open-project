@@ -1,0 +1,6 @@
+mutation createBoardComment(
+    $input: createBoardCommentRequestDto!
+    $boardId: String!
+) {
+    createBoardComment(input: $input, boardId: $boardId)
+}

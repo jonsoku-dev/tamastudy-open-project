@@ -1,0 +1,270 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type PostComment {
+  id: ID!
+  body: String!
+  user: Auth!
+  post: Post!
+}
+
+type Post implements PostInterface {
+  id: ID!
+  content: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: Auth!
+  comments: [PostComment!]!
+}
+
+interface PostInterface {
+  id: ID!
+  content: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: Auth!
+  comments: [PostComment!]!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type BoardComment implements BoardCommentInterface {
+  id: ID!
+  body: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: Auth!
+  board: Board!
+}
+
+interface BoardCommentInterface {
+  id: ID!
+  body: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: Auth!
+  board: Board!
+}
+
+type BoardLike {
+  id: ID!
+  userId: String!
+}
+
+type Board implements BoardInterface {
+  id: ID!
+  title: String!
+  desc: String!
+  view: Float!
+  category: BoardCategory!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: Auth!
+  comments: [BoardComment!]!
+  likes: [BoardLike!]!
+}
+
+interface BoardInterface {
+  id: ID!
+  title: String!
+  desc: String!
+  view: Float!
+  category: BoardCategory!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: Auth!
+  comments: [BoardComment!]!
+  likes: [BoardLike!]!
+}
+
+enum BoardCategory {
+  ALL
+  TRADE
+  JOB
+  FREE
+  FQ
+}
+
+type Auth implements AuthInterface {
+  id: ID!
+  username: String!
+  email: String!
+  avatar: String
+  followers: [Auth!]!
+  following: [Auth!]!
+}
+
+interface AuthInterface {
+  id: ID!
+  username: String!
+  email: String!
+  avatar: String
+  followers: [Auth!]!
+  following: [Auth!]!
+}
+
+type LoginResponse {
+  token: String!
+}
+
+type GetNoticeListResponseDto {
+  id: String!
+  title: String!
+  createdAt: DateTime!
+}
+
+type GetNoticeResponseDto {
+  id: String!
+  title: String!
+  desc: String!
+  view: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: Auth!
+}
+
+type PageInfo {
+  hasNextPage: Boolean
+  startCursor: String
+  endCursor: String
+}
+
+type Edges {
+  cursor: String!
+  node: Board!
+}
+
+type BoardListResponseDto {
+  edges: [Edges!]!
+  pageInfo: PageInfo!
+}
+
+type PlaceholderResponse {
+  userId: Float
+  id: Float
+  title: String
+  completed: Boolean
+}
+
+type GetNewsListResponse {
+  id: ID!
+  title: String
+  content: String
+  press: String
+  data: DateTime
+  url: String
+  portal: String
+  flag: NewsFlagEnum!
+}
+
+enum NewsFlagEnum {
+  KR
+  JP
+  US
+}
+
+type Query {
+  currentUser: Auth!
+  getPostList(filter: GetPostListFilter): [Post!]!
+  getPost(postId: String!): Post!
+  getNoticeList(search: String): [GetNoticeListResponseDto!]!
+  getNotice(noticeId: String!): GetNoticeResponseDto!
+  getBoardListByCategory(category: BoardCategory!): [Board!]!
+  getBoardList(after: Float, first: Float, search: String, category: BoardCategory): BoardListResponseDto!
+  getBoard(boardId: String!, isRefetch: Boolean = false): Board!
+  getPlaceholder: [PlaceholderResponse!]!
+  getNewsList(filter: NewsFlagFilter): [GetNewsListResponse!]!
+}
+
+input GetPostListFilter {
+  search: String
+}
+
+input NewsFlagFilter {
+  flag: NewsFlagEnum
+}
+
+type Mutation {
+  register(input: RegisterRequest!): Auth!
+  login(input: LoginRequest!): LoginResponse!
+  follow(targetUserId: String!): String!
+  unFollow(targetUserId: String!): String!
+  createPost(input: CreatePostRequest!): String!
+  editPost(input: EditPostRequest!, postId: String!): String!
+  deletePost(postId: String!): String!
+  createPostComment(input: CreatePostCommentRequest!, postId: String!): String!
+  editPostComment(input: EditPostCommentRequest!, postCommentId: String!): String!
+  deletePostComment(postCommentId: String!): String!
+  createNotice(input: CreateNoticeRequestDto!): String!
+  editNotice(input: EditNoticeRequestDto!, noticeId: String!): String!
+  deleteNotice(noticeId: String!): String!
+  createBoard(input: createBoardRequestDto!): String!
+  editBoard(input: editBoardRequestDto!, boardId: String!): String!
+  deleteBoard(boardId: String!): String!
+  createBoardComment(input: createBoardCommentRequestDto!, boardId: String!): String!
+  editBoardComment(input: editBoardCommentRequestDto!, boardCommentId: String!): String!
+  deleteBoardComment(boardCommentId: String!): String!
+  like(boardId: String!): String!
+  unLike(boardId: String!): String!
+}
+
+input RegisterRequest {
+  username: String!
+  email: String!
+  password: String!
+}
+
+input LoginRequest {
+  email: String!
+  password: String!
+}
+
+input CreatePostRequest {
+  content: String!
+}
+
+input EditPostRequest {
+  content: String
+}
+
+input CreatePostCommentRequest {
+  body: String!
+}
+
+input EditPostCommentRequest {
+  body: String
+}
+
+input CreateNoticeRequestDto {
+  title: String!
+  desc: String!
+}
+
+input EditNoticeRequestDto {
+  title: String
+  desc: String
+}
+
+input createBoardRequestDto {
+  title: String!
+  desc: String!
+  category: BoardCategory!
+}
+
+input editBoardRequestDto {
+  title: String
+  desc: String
+  category: BoardCategory
+}
+
+input createBoardCommentRequestDto {
+  body: String!
+}
+
+input editBoardCommentRequestDto {
+  body: String
+}

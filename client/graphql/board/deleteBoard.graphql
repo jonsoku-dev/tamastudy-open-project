@@ -1,0 +1,3 @@
+mutation deleteBoard($boardId: String!) {
+    deleteBoard(boardId: $boardId)
+}

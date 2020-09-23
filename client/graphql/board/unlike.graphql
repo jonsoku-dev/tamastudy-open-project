@@ -1,0 +1,3 @@
+mutation unLike($boardId: String!) {
+    unLike(boardId: $boardId)
+}

@@ -1,0 +1,10 @@
+server:
+  port: 5000
+
+db:
+  type: 'mysql'
+  port: 3306
+  database: 'tamastudy_dev'
+
+jwt:
+  expiresIn: 3600 * 1000

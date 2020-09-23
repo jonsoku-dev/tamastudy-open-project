@@ -1,0 +1,6 @@
+mutation editBoardComment(
+    $input: editBoardCommentRequestDto!
+    $boardCommentId: String!
+) {
+    editBoardComment(input: $input, boardCommentId: $boardCommentId)
+}

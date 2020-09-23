@@ -1,0 +1,36 @@
+query getBoardListByCategory{
+    tradeBoardList: getBoardListByCategory(category: TRADE) {
+        ...getBoardListByCategoryFields
+    }
+    jobBoardList: getBoardListByCategory(category: JOB) {
+        ...getBoardListByCategoryFields
+    }
+    freeBoardList: getBoardListByCategory(category: FREE) {
+        ...getBoardListByCategoryFields
+    }
+    fqBoardList: getBoardListByCategory(category: FQ) {
+        ...getBoardListByCategoryFields
+    }
+}
+
+fragment getBoardListByCategoryFields on Board {
+    id
+    title
+    desc
+    view
+    category
+    createdAt
+    updatedAt
+    user {
+        id
+        username
+        email
+        avatar
+    }
+    comments {
+        id
+    }
+    likes {
+        id
+    }
+}

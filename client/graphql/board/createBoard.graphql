@@ -1,0 +1,3 @@
+mutation createBoard($input: createBoardRequestDto!) {
+    createBoard(input: $input)
+}

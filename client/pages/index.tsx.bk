@@ -1,0 +1,59 @@
+import React from 'react';
+import { ApolloClient, NormalizedCacheObject, useQuery } from '@apollo/client';
+import { GetServerSideProps } from 'next';
+import {
+  BoardCategory,
+  GetBoardListByCategoryDocument,
+  GetBoardListByCategoryQuery,
+} from '../generated/graphql';
+import BasicLayout from '../components/BasicLayout';
+import BoardBox from '../components/organisms/BoardBox/BoardBox';
+import { initializeApollo } from '../lib/apolloClient';
+import BoardFrame from '../components/frames/BoardFrame/BoardFrame';
+import { isLoggedInSSR } from '../shared/isLoggedInSSR';
+
+export interface indexProps {}
+
+const Index: React.FC<indexProps> = () => {
+  const { data: boardData } = useQuery<GetBoardListByCategoryQuery>(
+    GetBoardListByCategoryDocument,
+    {
+      fetchPolicy: 'cache-first',
+    },
+  );
+  if (!boardData) {
+    return null;
+  }
+  return (
+    <BasicLayout title={'Home'}>
+      <BoardFrame>
+        <BoardBox category={BoardCategory.Trade} data={boardData?.tradeBoardList} />
+        <BoardBox category={BoardCategory.Fq} data={boardData?.fqBoardList} />
+        <BoardBox category={BoardCategory.Free} data={boardData?.freeBoardList} />
+        <BoardBox category={BoardCategory.Job} data={boardData?.jobBoardList} />
+      </BoardFrame>
+    </BasicLayout>
+  );
+};
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const apolloClient: ApolloClient<NormalizedCacheObject> = initializeApollo();
+  try {
+    await isLoggedInSSR({ ctx });
+    await apolloClient.query<GetBoardListByCategoryQuery>({
+      query: GetBoardListByCategoryDocument,
+      fetchPolicy: 'cache-first',
+    });
+  } catch (error) {
+    console.error(error);
+    ctx.res.writeHead(302, { Location: '/404' });
+    ctx.res.end();
+  }
+  return {
+    props: {
+      initialApolloState: apolloClient.cache.extract(),
+    },
+  };
+};
+
+export default Index;

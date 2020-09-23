@@ -1,0 +1,3 @@
+mutation editBoard($boardId: String!, $input: editBoardRequestDto!) {
+    editBoard(boardId: $boardId, input: $input)
+}

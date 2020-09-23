@@ -1,0 +1,3 @@
+mutation like($boardId: String!) {
+    like(boardId: $boardId)
+}

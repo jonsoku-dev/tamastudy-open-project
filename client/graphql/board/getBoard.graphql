@@ -1,0 +1,32 @@
+query getBoard($boardId: String!, $isRefetch: Boolean) {
+    getBoard(boardId: $boardId, isRefetch: $isRefetch) {
+        id
+        title
+        desc
+        view
+        category
+        createdAt
+        updatedAt
+        user {
+            id
+            username
+            email
+            avatar
+        }
+        comments {
+            id
+            body
+            createdAt
+            user{
+                id
+                username
+                email
+                avatar
+            }
+        }
+        likes {
+            id
+            userId
+        }
+    }
+}
