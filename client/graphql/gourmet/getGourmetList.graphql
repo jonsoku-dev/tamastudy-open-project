@@ -18,20 +18,10 @@ query getGourmetList(
     ) {
         id
         name
-        desc
         category
         score
         lat
         lng
         address
-        images
-        createdAt
-        updatedAt
-        user {
-            id
-            username
-            email
-            avatar
-        }
     }
 }

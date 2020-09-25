@@ -50,13 +50,13 @@ const GourmetSearch: React.FC<GourmetSearchProps> = ({ handleSearch }) => {
       <Select
         options={gourmetCategoryOptions}
         onChange={onChangeSelectCategory}
-        inputId={'boardCategory'}
+        inputId={'GourmetCategory'}
         defaultValue={gourmetCategoryOptions[0]}
       />
       <Select
         options={gourmetScoreOptions}
         onChange={onChangeSelectScore}
-        inputId={'boardCategory'}
+        inputId={'GourmetScore'}
         defaultValue={gourmetScoreOptions[0]}
       />
       <Search onClickSearch={onClickSearch} />

@@ -1156,13 +1156,13 @@ export type GetGourmetQuery = (
   { __typename?: 'Query' }
   & { getGourmet: (
     { __typename?: 'GetGourmetResponseDto' }
-    & Pick<GetGourmetResponseDto, 'id' | 'name' | 'desc' | 'category' | 'score' | 'lat' | 'lng' | 'images' | 'createdAt' | 'updatedAt'>
+    & Pick<GetGourmetResponseDto, 'id' | 'name' | 'desc' | 'category' | 'address' | 'score' | 'lat' | 'lng' | 'images' | 'createdAt' | 'updatedAt'>
     & { user: (
       { __typename?: 'Auth' }
       & Pick<Auth, 'id' | 'username' | 'email' | 'avatar'>
     ), comments: Array<(
       { __typename?: 'GourmetComment' }
-      & Pick<GourmetComment, 'id'>
+      & Pick<GourmetComment, 'id' | 'body' | 'images' | 'score' | 'createdAt'>
       & { user: (
         { __typename?: 'Auth' }
         & Pick<Auth, 'id' | 'username' | 'email' | 'avatar'>
@@ -1186,11 +1186,7 @@ export type GetGourmetListQuery = (
   { __typename?: 'Query' }
   & { getGourmetList: Array<(
     { __typename?: 'GetGourmetListResponseDto' }
-    & Pick<GetGourmetListResponseDto, 'id' | 'name' | 'desc' | 'category' | 'score' | 'lat' | 'lng' | 'address' | 'images' | 'createdAt' | 'updatedAt'>
-    & { user: (
-      { __typename?: 'Auth' }
-      & Pick<Auth, 'id' | 'username' | 'email' | 'avatar'>
-    ) }
+    & Pick<GetGourmetListResponseDto, 'id' | 'name' | 'category' | 'score' | 'lat' | 'lng' | 'address'>
   )> }
 );
 
@@ -2153,6 +2149,7 @@ export const GetGourmetDocument = gql`
     name
     desc
     category
+    address
     score
     lat
     lng
@@ -2167,6 +2164,10 @@ export const GetGourmetDocument = gql`
     }
     comments {
       id
+      body
+      images
+      score
+      createdAt
       user {
         id
         username
@@ -2208,21 +2209,11 @@ export const GetGourmetListDocument = gql`
   getGourmetList(search: $search, category: $category, limit: $limit, offset: $offset, score: $score, lat: $lat, lng: $lng) {
     id
     name
-    desc
     category
     score
     lat
     lng
     address
-    images
-    createdAt
-    updatedAt
-    user {
-      id
-      username
-      email
-      avatar
-    }
   }
 }
     `;

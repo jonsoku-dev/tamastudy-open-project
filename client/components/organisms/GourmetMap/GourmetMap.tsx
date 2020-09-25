@@ -1,9 +1,9 @@
 import React from 'react';
 import * as S from './GourmetMap.styled';
-import { GetGourmetListQuery } from '../../../generated/graphql';
+import { GetGourmetListResponseDto } from '../../../generated/graphql';
 
 export interface GourmetMapProps {
-  data: GetGourmetListQuery['getGourmetList'];
+  data: GetGourmetListResponseDto[];
 }
 
 const GourmetMap: React.FC<GourmetMapProps> = ({ data }) => {

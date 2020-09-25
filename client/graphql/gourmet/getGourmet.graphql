@@ -4,6 +4,7 @@ query getGourmet($gourmetId: String!) {
         name
         desc
         category
+        address
         score
         lat
         lng
@@ -18,7 +19,11 @@ query getGourmet($gourmetId: String!) {
         }
         comments {
             id
-            user {
+            body
+            images
+            score
+            createdAt
+            user{
                 id
                 username
                 email

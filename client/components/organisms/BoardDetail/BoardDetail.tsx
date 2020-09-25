@@ -24,6 +24,7 @@ import CommentBox from '../CommentBox/CommentBox';
 import CommentForm from '../../molecules/CommentForm/CommentForm';
 import { CurrentUserContext } from '../../../shared/getCurrentUser';
 import { fromNow } from '../../../shared/customDayjs';
+import UserLabel from '../../molecules/UserLabel/UserLabel';
 
 export interface BoardDetailProps {
   data: GetBoardQuery['getBoard'];
@@ -131,11 +132,11 @@ const BoardDetail: React.FC<BoardDetailProps> = ({ data }) => {
         <S.Desc>desc</S.Desc>
       </S.Content>
       <S.User>
-        <Avatar avatar={data.user.avatar} />
-        <S.Info>
-          <h3>{data.user.username}</h3>
-          <h5>{data.user.email}</h5>
-        </S.Info>
+        <UserLabel
+          avatar={data.user.avatar}
+          username={data.user.username}
+          email={data.user.email}
+        />
       </S.User>
       {userId === data.user.id && (
         <S.Buttons>

@@ -9,7 +9,6 @@ export const gourmetCategoryOptions = [
 ];
 
 export const gourmetScoreOptions = [
-  { value: 'ALL', label: 'ALL' },
   { value: 1, label: '⭐' },
   { value: 2, label: '⭐⭐' },
   { value: 3, label: '⭐⭐⭐' },

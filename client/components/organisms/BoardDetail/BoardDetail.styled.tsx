@@ -63,23 +63,7 @@ export const Desc = styled.div`
 
 // User
 export const User = styled.div`
-  padding: 16px;
-  margin-right: 16px;
-  display: inline-flex;
-  align-items: center;
-  border: 1px solid #eaeaea;
-  border-radius: 16px;
-  background-color: #eaeaea;
   justify-self: flex-end;
-`;
-export const Info = styled.div`
-  // username
-  h3 {
-    font-size: 1.6rem;
-  }
-  h5 {
-    font-size: 1rem;
-  }
 `;
 
 // Buttons

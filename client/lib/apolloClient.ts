@@ -91,16 +91,11 @@ function createApolloClient() {
               return incoming;
             },
           },
-        }
+        },
       },
-      Board: {
+      GetGourmetResponseDto: {
         fields: {
           comments: {
-            merge(_, incoming) {
-              return incoming;
-            },
-          },
-          likes: {
             merge(_, incoming) {
               return incoming;
             },
@@ -111,6 +106,11 @@ function createApolloClient() {
         fields: {
           getBoardList: fixedRelayStylePagination(),
           getBoard: {
+            merge(existing, incoming) {
+              return { ...existing, ...incoming };
+            },
+          },
+          getGourmet: {
             merge(existing, incoming) {
               return { ...existing, ...incoming };
             },

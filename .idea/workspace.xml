@@ -18,6 +18,16 @@
   <component name="ChangeListManager">
     <list default="true" id="499afb60-68aa-4cb9-a7b9-7d22d53381a3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/mysql/data/#ib_16384_0.dblwr" beforeDir="false" afterPath="$PROJECT_DIR$/docker/mysql/data/#ib_16384_0.dblwr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/mysql/data/binlog.000002" beforeDir="false" afterPath="$PROJECT_DIR$/docker/mysql/data/binlog.000002" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/mysql/data/db/board.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/docker/mysql/data/db/board.ibd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/mysql/data/db/gourmet.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/docker/mysql/data/db/gourmet.ibd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/mysql/data/db/gourmet_comment.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/docker/mysql/data/db/gourmet_comment.ibd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/mysql/data/ib_logfile0" beforeDir="false" afterPath="$PROJECT_DIR$/docker/mysql/data/ib_logfile0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/mysql/data/ibdata1" beforeDir="false" afterPath="$PROJECT_DIR$/docker/mysql/data/ibdata1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/mysql/data/mysql.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/docker/mysql/data/mysql.ibd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/mysql/data/undo_001" beforeDir="false" afterPath="$PROJECT_DIR$/docker/mysql/data/undo_001" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/mysql/data/undo_002" beforeDir="false" afterPath="$PROJECT_DIR$/docker/mysql/data/undo_002" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +55,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.linters.configure.manually.selectedeslint" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/server/src/gourmet/dto" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/client/components/molecules" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -62,11 +72,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/client/components/molecules" />
+      <recent name="$PROJECT_DIR$/client/components/organisms" />
       <recent name="$PROJECT_DIR$/server/src/gourmet/dto" />
       <recent name="$PROJECT_DIR$/server/src/gourmet/repositories" />
       <recent name="$PROJECT_DIR$/server/src/gourmet/interface" />
-      <recent name="$PROJECT_DIR$/server/src/openchat/dto" />
-      <recent name="$PROJECT_DIR$/client/components/molecules/CommentReplyCard" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/server/public" />
@@ -94,7 +104,7 @@
       <workItem from="1600821288804" duration="842000" />
       <workItem from="1600822137483" duration="30598000" />
       <workItem from="1600949503703" duration="738000" />
-      <workItem from="1600951896050" duration="34993000" />
+      <workItem from="1600951896050" duration="50630000" />
     </task>
     <servers />
   </component>
@@ -170,22 +180,22 @@
       <screen x="0" y="23" width="5120" height="1417" />
     </state>
     <state x="2979" y="129" width="1666" height="1200" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.23.5120.1417@0.23.5120.1417" timestamp="1600764354695" />
-    <state x="3845" y="648" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1600084103738">
+    <state x="3845" y="648" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601044867963">
       <screen x="0" y="23" width="5120" height="1417" />
     </state>
-    <state x="3845" y="648" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.5120.1417@0.23.5120.1417" timestamp="1600084103738" />
+    <state x="3845" y="648" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.5120.1417@0.23.5120.1417" timestamp="1601044867963" />
     <state x="2691" y="123" width="2158" height="1217" key="dock-window-1" timestamp="1600279115169">
       <screen x="0" y="23" width="5120" height="1417" />
     </state>
     <state x="2691" y="123" width="2158" height="1217" key="dock-window-1/0.23.5120.1417@0.23.5120.1417" timestamp="1600279115169" />
-    <state x="3742" y="469" width="584" height="580" key="find.popup" timestamp="1600939467790">
+    <state x="3742" y="469" width="584" height="580" key="find.popup" timestamp="1601050802072">
       <screen x="0" y="23" width="5120" height="1417" />
     </state>
-    <state x="3742" y="469" width="584" height="580" key="find.popup/0.23.5120.1417@0.23.5120.1417" timestamp="1600939467790" />
-    <state x="3699" y="348" width="670" height="676" key="search.everywhere.popup" timestamp="1601028796314">
+    <state x="3742" y="469" width="584" height="580" key="find.popup/0.23.5120.1417@0.23.5120.1417" timestamp="1601050802072" />
+    <state x="3699" y="348" width="670" height="676" key="search.everywhere.popup" timestamp="1601048868542">
       <screen x="0" y="23" width="5120" height="1417" />
     </state>
-    <state x="3699" y="348" width="670" height="676" key="search.everywhere.popup/0.23.5120.1417@0.23.5120.1417" timestamp="1601028796314" />
+    <state x="3699" y="348" width="670" height="676" key="search.everywhere.popup/0.23.5120.1417@0.23.5120.1417" timestamp="1601048868542" />
     <state x="3542" y="567" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1600778902538">
       <screen x="0" y="23" width="5120" height="1417" />
     </state>
