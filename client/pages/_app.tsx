@@ -11,6 +11,7 @@ import { CurrentUserProvider } from '../shared/getCurrentUser';
 
 const App: React.FC<any> = ({ Component, pageProps }: any) => {
   const apolloClient = useApollo(pageProps.initialApolloState);
+  console.log(apolloClient.cache.data);
   return (
     <>
       <Head>

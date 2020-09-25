@@ -59,11 +59,12 @@ export class GourmetRepository extends Repository<Gourmet> {
             .orderBy('distance', 'DESC')
         }
       }
-      return await query
+      const result = await query
         .leftJoinAndSelect('gourmet.user', 'user')
         .leftJoinAndSelect('gourmet.comments', 'comments')
         .leftJoinAndSelect('comments.user', 'commentUser')
         .getMany();
+      return result;
     } catch (e) {
       console.error(e);
       throw new InternalServerErrorException(e);

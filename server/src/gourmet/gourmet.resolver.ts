@@ -23,6 +23,7 @@ export class GourmetResolver {
   getGourmetList(
     @Args() getGourmetListFilterDto: GetGourmetListFilterDto,
   ): Promise<GetGourmetListResponseDto[]> {
+    console.log(getGourmetListFilterDto);
     return this.gourmetService.getGourmetList(getGourmetListFilterDto);
   }
 
