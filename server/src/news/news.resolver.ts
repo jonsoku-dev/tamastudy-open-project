@@ -4,6 +4,9 @@ import { PlaceholderResponse } from './response/placeholder.response';
 import { GetNewsListResponse } from './response/get-news-list.response';
 import { NewsFlagEnum } from './enum/news-flag.enum';
 import { NewsFlagFilter } from './filter/news-flag.filter';
+import { BoardCategory } from '../board/enum/board-category.enum';
+import { BoardCategoryValidationPipe } from '../board/pipes/board-category-validation.pipe';
+import { NewsFlagValidationPipe } from './pipes/newsFlagValidation.pipe';
 
 @Resolver()
 export class NewsResolver {
@@ -16,8 +19,16 @@ export class NewsResolver {
 
   @Query(() => [GetNewsListResponse])
   getNewsList(
-    @Args('filter', { nullable: true }) filter: NewsFlagFilter,
+    @Args(
+      'flag',
+      {
+        name: 'flag',
+        type: () => NewsFlagEnum,
+      },
+      NewsFlagValidationPipe,
+    )
+    flag: NewsFlagEnum,
   ): Promise<GetNewsListResponse[]> {
-    return this.newsService.getNewsList(filter);
+    return this.newsService.getNewsList(flag);
   }
 }

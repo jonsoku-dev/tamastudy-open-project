@@ -1,0 +1,3 @@
+mutation editGourmet($input: EditGourmetRequestDto!, $gourmetId: String!) {
+    editGourmet(input: $input, gourmetId: $gourmetId)
+}

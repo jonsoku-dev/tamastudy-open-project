@@ -1,50 +1,26 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import * as S from './CommentCard.styled';
 import Avatar from '../../atoms/Avatar/Avatar';
-import {
-  Auth,
-  BoardComment,
-  DeleteBoardCommentDocument,
-  DeleteBoardCommentMutation,
-  GetBoardDocument,
-  MutationDeleteBoardCommentArgs,
-} from '../../../generated/graphql';
-import { CurrentUserContext } from '../../../shared/getCurrentUser';
 import CommentForm from '../CommentForm/CommentForm';
-import { useMutation } from '@apollo/client';
-import { useRouter } from 'next/router';
+import { faReply } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { fromNow } from '../../../shared/customDayjs';
 
 export interface CommentCardProps {
-  data: { __typename?: 'BoardComment' | undefined } & Pick<
-    BoardComment,
-    'id' | 'body' | 'createdAt'
-  > & { user: { __typename?: 'Auth' } & Pick<Auth, 'id' | 'username' | 'avatar'> };
+  data: any;
+  isReply?: boolean;
+  onClickDelete: any;
+  userId: string | undefined | null;
 }
 
-const CommentCard: React.FC<CommentCardProps> = ({ data }) => {
-  const router = useRouter();
-  const boardId = router.query.boardId as string;
-  const { userId } = useContext(CurrentUserContext);
+const CommentCard: React.FC<CommentCardProps> = ({
+  data,
+  isReply = false,
+  onClickDelete,
+  userId,
+}) => {
+  const [createMode, setCreateMode] = useState(false);
   const [editMode, setEditMode] = useState(false);
-
-  const [deleteBoardCommentMutation] = useMutation<
-    DeleteBoardCommentMutation,
-    MutationDeleteBoardCommentArgs
-  >(DeleteBoardCommentDocument, {
-    refetchQueries: [{ query: GetBoardDocument, variables: { boardId, isRefetch: true } }],
-  });
-
-  const onClickDelete = useCallback(async () => {
-    try {
-      await deleteBoardCommentMutation({
-        variables: {
-          boardCommentId: data.id,
-        },
-      });
-    } catch (e) {
-      alert(e.message);
-    }
-  }, [data]);
 
   const onClickEditButton = useCallback(() => {
     setEditMode(true);
@@ -54,32 +30,55 @@ const CommentCard: React.FC<CommentCardProps> = ({ data }) => {
     setEditMode(false);
   }, [editMode]);
 
+  const onClickCreateButton = useCallback(() => {
+    setCreateMode(true);
+  }, [createMode]);
+
+  const onClickCreateSubmit = useCallback(() => {
+    setCreateMode(false);
+  }, [createMode]);
+
   return (
-    <S.Wrapper>
-      <Avatar avatar={data.user.avatar}/>
-      <S.Content>
-        <S.Name>
-          <p>{data.user.username}</p>
-          <span>{data.createdAt}</span>
-        </S.Name>
-        {editMode ? (
-          <CommentForm
-            isEdit
-            editId={data.id}
-            editBody={data.body}
-            onClickEditSubmit={onClickEditSubmit}
-          />
-        ) : (
-          <S.Body>{data.body}</S.Body>
+    <>
+      {' '}
+      <S.Wrapper>
+        {isReply && (
+          <S.Reply>
+            <FontAwesomeIcon size={'lg'} icon={faReply} />
+          </S.Reply>
         )}
-      </S.Content>
-      {data.user.id === userId && !editMode && (
+        <Avatar avatar={data.user.avatar} />
+        <S.Content>
+          <S.Name>
+            <p>{data.user.username}</p>
+            <span>{fromNow(data.createdAt)}</span>
+          </S.Name>
+          {editMode ? (
+            <CommentForm
+              isEdit
+              isReply={isReply}
+              editId={data.id}
+              editBody={data.body}
+              onClickEditSubmit={onClickEditSubmit}
+            />
+          ) : (
+            <S.Body>{data.body}</S.Body>
+          )}
+        </S.Content>
         <S.Buttons>
-          <button onClick={onClickEditButton}>Edit</button>
-          <button onClick={onClickDelete}>Delete</button>
+          {data.user.id === userId && !editMode && (
+            <>
+              <button onClick={onClickEditButton}>Edit</button>
+              <button onClick={onClickDelete(data.id)}>Delete</button>
+            </>
+          )}
+          {!isReply && userId && <button onClick={onClickCreateButton}>reply</button>}
         </S.Buttons>
+      </S.Wrapper>
+      {!isReply && createMode && (
+        <CommentForm commentId={data.id} onClickCreateSubmit={onClickCreateSubmit} />
       )}
-    </S.Wrapper>
+    </>
   );
 };
 

@@ -1,0 +1,37 @@
+query getGourmetList(
+    $search: String
+    $category: GourmetCategory
+    $limit: Float
+    $offset: Float
+    $score: Float
+    $lat: Float!
+    $lng: Float!
+) {
+    getGourmetList(
+        search: $search
+        category: $category
+        limit: $limit
+        offset: $offset
+        score: $score
+        lat: $lat
+        lng: $lng
+    ) {
+        id
+        name
+        desc
+        category
+        score
+        lat
+        lng
+        address
+        images
+        createdAt
+        updatedAt
+        user {
+            id
+            username
+            email
+            avatar
+        }
+    }
+}

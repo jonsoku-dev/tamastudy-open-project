@@ -1,0 +1,6 @@
+mutation editGourmetComment(
+    $gourmetCommentId: String!
+    $input: EditGourmetCommentRequestDto!
+) {
+    editGourmetComment(gourmetCommentId: $gourmetCommentId, input: $input)
+}

@@ -1,0 +1,16 @@
+query getNoticeList($search: String, $limit: Float, $offset: Float) {
+    getNoticeList(search: $search, limit: $limit, offset: $offset) {
+        id
+        title
+        desc
+        view
+        createdAt
+        updatedAt
+        user {
+            id
+            username
+            email
+            avatar
+        }
+    }
+}

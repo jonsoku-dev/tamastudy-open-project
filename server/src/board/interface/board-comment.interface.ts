@@ -1,6 +1,7 @@
 import { Field, ID, InterfaceType } from '@nestjs/graphql';
 import { Auth } from '../../auth/entities/auth.entity';
 import { Board } from '../entities/board.entity';
+import { BoardCommentReply } from '../entities/board-comment-reply.entity';
 
 @InterfaceType()
 export class BoardCommentInterface {
@@ -17,8 +18,11 @@ export class BoardCommentInterface {
   updatedAt: Date;
 
   @Field(() => Auth)
-  user: Promise<Auth>;
+  user: Auth;
 
   @Field(() => Board)
-  board: Promise<Board>;
+  board: Board;
+
+  @Field(() => [BoardCommentReply])
+  boardCommentReplies: BoardCommentReply[];
 }

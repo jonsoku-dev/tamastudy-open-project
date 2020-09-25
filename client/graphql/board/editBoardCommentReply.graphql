@@ -1,0 +1,3 @@
+mutation editBoardCommentReply($input: EditBoardCommentReplyRequestDto!, $boardCommentReplyId: String!) {
+    editBoardCommentReply(input: $input, boardCommentReplyId: $boardCommentReplyId)
+}

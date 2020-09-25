@@ -15,7 +15,6 @@ import { BoardCategory } from '../enum/board-category.enum';
 import { BoardComment } from './board-comment.entity';
 import { BoardLike } from './board-like.entity';
 import { BoardInterface } from '../interface/board.interface';
-import { IsString } from 'class-validator';
 
 @ObjectType({
   implements: [BoardInterface],
@@ -37,6 +36,9 @@ export class Board extends BaseEntity implements BoardInterface {
   @Column()
   category: BoardCategory;
 
+  @Column()
+  filepath: string;
+
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 
@@ -46,9 +48,7 @@ export class Board extends BaseEntity implements BoardInterface {
   @Column()
   userId: string;
 
-  @ManyToOne(() => Auth, (user) => user.boards, {
-    nullable: true,
-  })
+  @ManyToOne(() => Auth, (user) => user.boards)
   @JoinColumn({ name: 'userId' })
   user: Auth;
 
@@ -57,4 +57,7 @@ export class Board extends BaseEntity implements BoardInterface {
 
   @OneToMany(() => BoardLike, (like) => like.board)
   likes: BoardLike[];
+
+  @Column({ nullable: true })
+  likesCount: number;
 }

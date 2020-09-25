@@ -13,7 +13,6 @@ export const Section = styled.div<ISection>`
   justify-content: center;
   align-items: center;
   height: ${(props) => {
-    console.log(props.height);
     return props.height;
   }}px;
 `;

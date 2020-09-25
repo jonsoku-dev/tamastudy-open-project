@@ -1,25 +1,19 @@
 import { useMemo } from 'react';
 import { ApolloClient, FieldPolicy, InMemoryCache } from '@apollo/client';
-import { BatchHttpLink } from 'apollo-link-batch-http';
 import { setContext } from 'apollo-link-context';
 import { onError } from 'apollo-link-error';
 import Cookies from 'js-cookie';
 import { ApolloLink } from 'apollo-link';
+import { createUploadLink } from 'apollo-upload-client';
 import { relayStylePagination } from '@apollo/client/utilities';
 
 let apolloClient: any;
 
 function createApolloClient() {
-  // const httpLink = createHttpLink({
-  //   uri: 'http://localhost:5000/graphql',
-  //   credentials: 'include',
-  // });
-
   const errorLink = onError(({ graphQLErrors, networkError }) => {
     // server
     // TODO
     // client
-    console.log(graphQLErrors);
     if (graphQLErrors)
       graphQLErrors.map(({ message, locations, path }) => {
         console.log(
@@ -50,7 +44,7 @@ function createApolloClient() {
     }
   });
 
-  const batchLink = new BatchHttpLink({
+  const uploadLink = createUploadLink({
     uri: 'http://localhost:5000/graphql',
     credentials: 'include',
   });
@@ -90,6 +84,15 @@ function createApolloClient() {
 
   const cache = new InMemoryCache({
     typePolicies: {
+      BoardComment: {
+        fields: {
+          boardCommentReplies: {
+            merge(_, incoming) {
+              return incoming;
+            },
+          },
+        }
+      },
       Board: {
         fields: {
           comments: {
@@ -101,7 +104,7 @@ function createApolloClient() {
             merge(_, incoming) {
               return incoming;
             },
-          }
+          },
         },
       },
       Query: {
@@ -121,7 +124,7 @@ function createApolloClient() {
     ssrMode: typeof window === 'undefined',
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    link: ApolloLink.from([errorLink, authLink, batchLink]),
+    link: ApolloLink.from([errorLink, authLink, uploadLink]),
     cache,
   });
 }

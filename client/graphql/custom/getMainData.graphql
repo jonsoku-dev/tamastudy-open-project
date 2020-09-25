@@ -1,0 +1,36 @@
+query getMainData {
+    getNoticeList(limit: 4) {
+        id
+        title
+        createdAt
+    }
+    krBoardList: getNewsList(flag: KR) {
+        ...getNewsListFields
+    }
+    jpBoardList: getNewsList(flag: JP) {
+        ...getNewsListFields
+    }
+    usBoardList: getNewsList(flag: US) {
+        ...getNewsListFields
+    }
+    tradeBoardList: getBoardListByCategory(category: TRADE) {
+        ...getBoardListByCategoryFields
+    }
+    jobBoardList: getBoardListByCategory(category: JOB) {
+        ...getBoardListByCategoryFields
+    }
+    freeBoardList: getBoardListByCategory(category: FREE) {
+        ...getBoardListByCategoryFields
+    }
+    fqBoardList: getBoardListByCategory(category: FQ) {
+        ...getBoardListByCategoryFields
+    }
+    getOpenchatList {
+        id
+        name
+        category
+        participationNumber
+        link
+        createdAt
+    }
+}

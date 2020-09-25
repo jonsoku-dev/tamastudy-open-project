@@ -7,6 +7,7 @@ module.exports = {
   database: process.env.MYSQL_DATABASE,
   autoLoadEntities: true,
   synchronize: true,
+  logging: true,
   cli: {
     migrationsDir: 'src/migrations',
   },

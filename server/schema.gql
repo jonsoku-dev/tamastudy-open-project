@@ -32,6 +32,28 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type BoardCommentReply implements BoardCommentReplyInterface {
+  id: ID!
+  body: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  userId: String!
+  user: Auth!
+  boardCommentId: String!
+  boardComment: BoardComment!
+}
+
+interface BoardCommentReplyInterface {
+  id: ID!
+  body: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  userId: String!
+  user: Auth!
+  boardCommentId: String!
+  boardComment: BoardComment!
+}
+
 type BoardComment implements BoardCommentInterface {
   id: ID!
   body: String!
@@ -39,6 +61,7 @@ type BoardComment implements BoardCommentInterface {
   updatedAt: DateTime!
   user: Auth!
   board: Board!
+  boardCommentReplies: [BoardCommentReply!]!
 }
 
 interface BoardCommentInterface {
@@ -48,6 +71,7 @@ interface BoardCommentInterface {
   updatedAt: DateTime!
   user: Auth!
   board: Board!
+  boardCommentReplies: [BoardCommentReply!]!
 }
 
 type BoardLike {
@@ -61,11 +85,13 @@ type Board implements BoardInterface {
   desc: String!
   view: Float!
   category: BoardCategory!
+  filepath: String!
   createdAt: DateTime!
   updatedAt: DateTime!
   user: Auth!
   comments: [BoardComment!]!
   likes: [BoardLike!]!
+  likesCount: Float!
 }
 
 interface BoardInterface {
@@ -74,11 +100,13 @@ interface BoardInterface {
   desc: String!
   view: Float!
   category: BoardCategory!
+  filepath: String!
   createdAt: DateTime!
   updatedAt: DateTime!
   user: Auth!
   comments: [BoardComment!]!
   likes: [BoardLike!]!
+  likesCount: Float!
 }
 
 enum BoardCategory {
@@ -87,6 +115,67 @@ enum BoardCategory {
   JOB
   FREE
   FQ
+}
+
+type GourmetComment implements GourmetCommentInterface {
+  id: ID!
+  body: String!
+  images: String
+  score: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: Auth!
+  gourmet: Gourmet!
+}
+
+interface GourmetCommentInterface {
+  id: ID!
+  body: String!
+  images: String
+  score: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: Auth!
+  gourmet: Gourmet!
+}
+
+type Gourmet implements GourmetInterface {
+  id: ID!
+  name: String!
+  desc: String!
+  category: GourmetCategory!
+  score: Float!
+  lat: Float!
+  lng: Float!
+  address: String!
+  images: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: Auth!
+  comments: [GourmetComment!]!
+}
+
+interface GourmetInterface {
+  id: ID!
+  name: String!
+  desc: String!
+  category: GourmetCategory!
+  score: Float!
+  lat: Float!
+  lng: Float!
+  address: String!
+  images: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: Auth!
+  comments: [GourmetComment!]!
+}
+
+enum GourmetCategory {
+  NOODLE
+  RICE
+  BREAD
+  MEAT
 }
 
 type Auth implements AuthInterface {
@@ -114,7 +203,11 @@ type LoginResponse {
 type GetNoticeListResponseDto {
   id: String!
   title: String!
+  desc: String!
+  view: Float!
   createdAt: DateTime!
+  updatedAt: DateTime!
+  user: Auth!
 }
 
 type GetNoticeResponseDto {
@@ -167,25 +260,93 @@ enum NewsFlagEnum {
   US
 }
 
+type Openchat implements OpenchatInterface {
+  id: ID!
+  name: String!
+  desc: String!
+  category: OpenchatCategory!
+  participationNumber: String!
+  link: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+interface OpenchatInterface {
+  id: ID!
+  name: String!
+  desc: String!
+  category: OpenchatCategory!
+  participationNumber: String!
+  link: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+enum OpenchatCategory {
+  IT
+  STUDY
+  INFO
+}
+
+type GetOpenchatListResponseDto {
+  id: ID!
+  name: String!
+  category: OpenchatCategory!
+  participationNumber: String!
+  link: String!
+  createdAt: DateTime!
+}
+
+type GetGourmetListResponseDto {
+  id: ID!
+  name: String!
+  desc: String!
+  category: GourmetCategory!
+  score: Float!
+  lat: Float!
+  lng: Float!
+  address: String!
+  images: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: Auth!
+  comments: [GourmetComment!]!
+}
+
+type GetGourmetResponseDto {
+  id: ID!
+  name: String!
+  desc: String!
+  category: GourmetCategory!
+  score: Float!
+  lat: Float!
+  lng: Float!
+  address: String!
+  images: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: Auth!
+  comments: [GourmetComment!]!
+}
+
 type Query {
   currentUser: Auth!
   getPostList(filter: GetPostListFilter): [Post!]!
   getPost(postId: String!): Post!
-  getNoticeList(search: String): [GetNoticeListResponseDto!]!
+  getNoticeList(search: String, limit: Float, offset: Float): [GetNoticeListResponseDto!]!
   getNotice(noticeId: String!): GetNoticeResponseDto!
   getBoardListByCategory(category: BoardCategory!): [Board!]!
   getBoardList(after: Float, first: Float, search: String, category: BoardCategory): BoardListResponseDto!
   getBoard(boardId: String!, isRefetch: Boolean = false): Board!
   getPlaceholder: [PlaceholderResponse!]!
-  getNewsList(filter: NewsFlagFilter): [GetNewsListResponse!]!
+  getNewsList(flag: NewsFlagEnum!): [GetNewsListResponse!]!
+  getOpenchatList(category: OpenchatCategory, take: Float, offset: Float, search: String): [GetOpenchatListResponseDto!]!
+  getGourmetList(search: String, category: GourmetCategory, limit: Float, offset: Float, score: Float, lat: Float!, lng: Float!): [GetGourmetListResponseDto!]!
+  getGourmet(gourmetId: String!): GetGourmetResponseDto!
 }
 
 input GetPostListFilter {
   search: String
-}
-
-input NewsFlagFilter {
-  flag: NewsFlagEnum
 }
 
 type Mutation {
@@ -202,14 +363,27 @@ type Mutation {
   createNotice(input: CreateNoticeRequestDto!): String!
   editNotice(input: EditNoticeRequestDto!, noticeId: String!): String!
   deleteNotice(noticeId: String!): String!
-  createBoard(input: createBoardRequestDto!): String!
-  editBoard(input: editBoardRequestDto!, boardId: String!): String!
+  uploadFile(file: Upload!): Boolean!
+  createBoard(file: Upload, input: CreateBoardRequestDto!): String!
+  editBoard(input: EditBoardRequestDto!, boardId: String!): String!
   deleteBoard(boardId: String!): String!
-  createBoardComment(input: createBoardCommentRequestDto!, boardId: String!): String!
-  editBoardComment(input: editBoardCommentRequestDto!, boardCommentId: String!): String!
+  createBoardComment(input: CreateBoardCommentRequestDto!, boardId: String!): String!
+  editBoardComment(input: EditBoardCommentRequestDto!, boardCommentId: String!): String!
   deleteBoardComment(boardCommentId: String!): String!
   like(boardId: String!): String!
   unLike(boardId: String!): String!
+  createBoardCommentReply(body: String!, boardCommentId: String!): String!
+  deleteBoardCommentReply(boardCommentReplyId: String!): String!
+  editBoardCommentReply(input: EditBoardCommentReplyRequestDto!, boardCommentReplyId: String!): String!
+  createOpenchat(input: CreateOpenchatRequestDto!): Openchat!
+  editOpenchat(input: EditOpenchatRequestDto!, openchatId: String!): String!
+  deleteOpenchat(openchatId: String!): String!
+  createGourmet(input: CreateGourmetRequestDto!): Gourmet!
+  editGourmet(input: EditGourmetRequestDto!, gourmetId: String!): String!
+  deleteGourmet(gourmetId: String!): String!
+  createGourmetComment(input: CreateGourmetCommentRequestDto!, gourmetId: String!): GourmetComment!
+  editGourmetComment(input: EditGourmetCommentRequestDto!, gourmetCommentId: String!): String!
+  deleteGourmetComment(gourmetCommentId: String!): String!
 }
 
 input RegisterRequest {
@@ -249,22 +423,79 @@ input EditNoticeRequestDto {
   desc: String
 }
 
-input createBoardRequestDto {
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+input CreateBoardRequestDto {
   title: String!
   desc: String!
   category: BoardCategory!
 }
 
-input editBoardRequestDto {
+input EditBoardRequestDto {
   title: String
   desc: String
   category: BoardCategory
 }
 
-input createBoardCommentRequestDto {
+input CreateBoardCommentRequestDto {
   body: String!
 }
 
-input editBoardCommentRequestDto {
+input EditBoardCommentRequestDto {
   body: String
+}
+
+input EditBoardCommentReplyRequestDto {
+  body: String
+}
+
+input CreateOpenchatRequestDto {
+  name: String!
+  desc: String!
+  category: OpenchatCategory!
+  participationNumber: String!
+  link: String!
+}
+
+input EditOpenchatRequestDto {
+  name: String
+  desc: String
+  category: OpenchatCategory
+  participationNumber: String
+  link: String
+}
+
+input CreateGourmetRequestDto {
+  name: String!
+  desc: String!
+  category: GourmetCategory!
+  score: Int!
+  lat: Float!
+  lng: Float!
+  address: String!
+  images: String
+}
+
+input EditGourmetRequestDto {
+  name: String
+  desc: String
+  category: GourmetCategory
+  score: Int
+  lat: Float
+  lng: Float
+  address: String
+  images: String
+}
+
+input CreateGourmetCommentRequestDto {
+  body: String!
+  score: Int!
+  images: String
+}
+
+input EditGourmetCommentRequestDto {
+  body: String
+  score: Int
+  images: String
 }

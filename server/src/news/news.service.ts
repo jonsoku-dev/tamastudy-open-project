@@ -25,7 +25,7 @@ export class NewsService {
     }
   }
 
-  async getNewsList(filter: NewsFlagFilter): Promise<GetNewsListResponse[]> {
-    return this.newsRepository.getNewsList(filter);
+  async getNewsList(flag: NewsFlagEnum): Promise<GetNewsListResponse[]> {
+    return this.newsRepository.getNewsList(flag);
   }
 }

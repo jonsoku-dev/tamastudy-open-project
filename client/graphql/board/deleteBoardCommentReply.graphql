@@ -1,0 +1,3 @@
+mutation deleteBoardCommentReply($boardCommentReplyId: String!) {
+    deleteBoardCommentReply(boardCommentReplyId: $boardCommentReplyId)
+}

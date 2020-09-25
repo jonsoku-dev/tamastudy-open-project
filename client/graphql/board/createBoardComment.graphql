@@ -1,5 +1,5 @@
 mutation createBoardComment(
-    $input: createBoardCommentRequestDto!
+    $input: CreateBoardCommentRequestDto!
     $boardId: String!
 ) {
     createBoardComment(input: $input, boardId: $boardId)

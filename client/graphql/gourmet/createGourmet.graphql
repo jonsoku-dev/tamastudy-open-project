@@ -1,0 +1,5 @@
+mutation createGourmet($input: CreateGourmetRequestDto!) {
+    createGourmet(input: $input) {
+        id
+    }
+}

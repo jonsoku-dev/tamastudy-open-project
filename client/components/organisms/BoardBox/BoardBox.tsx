@@ -2,15 +2,14 @@ import React from 'react';
 import * as S from './BoardBox.styled';
 import BoardCard from '../../molecules/BoardCard/BoardCard';
 import Link from 'next/link';
-import { BoardCategory, GetBoardListByCategoryQuery } from '../../../generated/graphql';
+import { BoardCategory, GetMainDataQuery } from '../../../generated/graphql';
 
 export interface BoardBoxProps {
   category: BoardCategory;
-  data:
-    | GetBoardListByCategoryQuery['jobBoardList']
-    | GetBoardListByCategoryQuery['freeBoardList']
-    | GetBoardListByCategoryQuery['fqBoardList']
-    | GetBoardListByCategoryQuery['tradeBoardList'];
+  data: GetMainDataQuery['jobBoardList'] &
+    GetMainDataQuery['tradeBoardList'] &
+    GetMainDataQuery['freeBoardList'] &
+    GetMainDataQuery['fqBoardList'];
 }
 
 const BoardBox: React.FC<BoardBoxProps> = ({ category, data }) => {
@@ -23,7 +22,9 @@ const BoardBox: React.FC<BoardBoxProps> = ({ category, data }) => {
           </Link>
         </S.Title>
       </S.Header>
-      {data.map((board) => <BoardCard key={board.id} data={board} isMain/>)}
+      {data.map((board) => (
+        <BoardCard key={board.id} data={board} isMain />
+      ))}
     </S.Wrapper>
   );
 };

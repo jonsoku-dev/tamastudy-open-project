@@ -1,4 +1,9 @@
-import { CacheModule, Module } from '@nestjs/common';
+import {
+  CacheModule,
+  Module,
+  MiddlewareConsumer,
+  RequestMethod,
+} from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import * as redisStore from 'cache-manager-redis-store';
 import { TypeOrmCoreModule } from '@nestjs/typeorm/dist/typeorm-core.module';
@@ -10,9 +15,18 @@ import { NewsModule } from './news/news.module';
 import { CommonModule } from './common/common.module';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from '@hapi/joi';
+import { GraphQLUpload } from 'apollo-server-express';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+import { ServeHTMLMiddleware } from './app.middleware';
+import { OpenchatModule } from './openchat/openchat.module';
+import { GourmetModule } from './gourmet/gourmet.module';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(process.cwd(), 'client'),
+    }),
     ConfigModule.forRoot({
       envFilePath: '../.env',
       validationSchema: Joi.object({
@@ -33,6 +47,7 @@ import * as Joi from '@hapi/joi';
         database: process.env.MYSQL_DATABASE,
         autoLoadEntities: true,
         synchronize: true,
+        logging: true,
         cli: {
           migrationsDir: 'src/migrations',
         },
@@ -40,10 +55,15 @@ import * as Joi from '@hapi/joi';
     }),
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
+      resolvers: { Upload: GraphQLUpload },
       context: ({ req, res }) => ({ req, res }),
       cors: {
         credentials: true,
         origin: true,
+      },
+      uploads: {
+        maxFileSize: 10000000, // 10 MB
+        maxFiles: 5,
       },
     }),
     CacheModule.register({
@@ -56,7 +76,15 @@ import * as Joi from '@hapi/joi';
     NoticeModule,
     BoardModule,
     NewsModule,
+    OpenchatModule,
+    GourmetModule,
   ],
   controllers: [],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(ServeHTMLMiddleware)
+      .forRoutes({ path: '*', method: RequestMethod.GET });
+  }
+}

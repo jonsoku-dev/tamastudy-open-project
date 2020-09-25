@@ -1,0 +1,3 @@
+mutation createBoardCommentReply($body: String!, $boardCommentId: String!) {
+    createBoardCommentReply(boardCommentId: $boardCommentId, body: $body)
+}

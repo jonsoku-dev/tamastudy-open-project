@@ -1,0 +1,5 @@
+mutation createGourmetComment($gourmetId: String!, $input: CreateGourmetCommentRequestDto!) {
+    createGourmetComment(gourmetId: $gourmetId, input: $input) {
+        id
+    }
+}

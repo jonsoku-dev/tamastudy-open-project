@@ -5,12 +5,7 @@ import BasicLayout from '../components/BasicLayout';
 import { initializeApollo } from '../lib/apolloClient';
 import { isLoggedInSSR } from '../shared/isLoggedInSSR';
 import Main from '../components/templates/Main/Main';
-import {
-  GetBoardListByCategoryDocument,
-  GetBoardListByCategoryQuery,
-  GetNewsListDocument,
-  GetNewsListQuery,
-} from '../generated/graphql';
+import { GetMainDataDocument, GetMainDataQuery } from '../generated/graphql';
 
 export interface indexProps {}
 
@@ -26,12 +21,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const apolloClient: ApolloClient<NormalizedCacheObject> = initializeApollo();
   try {
     await isLoggedInSSR({ ctx });
-    await apolloClient.query<GetBoardListByCategoryQuery>({
-      query: GetBoardListByCategoryDocument,
-      fetchPolicy: 'cache-first',
-    });
-    await apolloClient.query<GetNewsListQuery>({
-      query: GetNewsListDocument,
+    await apolloClient.query<GetMainDataQuery>({
+      query: GetMainDataDocument,
       fetchPolicy: 'cache-first',
     });
   } catch (error) {

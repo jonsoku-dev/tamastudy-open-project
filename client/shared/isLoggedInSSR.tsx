@@ -19,6 +19,7 @@ export const isLoggedInSSR = async ({
   const apolloClient: ApolloClient<NormalizedCacheObject> = initializeApollo();
   try {
     const token = cookies(ctx).token;
+    console.log(token);
     if (!token && redirectWhenLoggedOut) {
       ctx.res.writeHead(302, { Location: '/login' });
       ctx.res.end();

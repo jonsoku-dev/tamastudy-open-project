@@ -28,6 +28,7 @@ export const CardTitle = styled.div`
 `;
 export const CardInfo = styled.div``;
 export const Kakao = styled.div`
+  cursor: pointer;
   width: 30px;
   height: 30px;
   img {

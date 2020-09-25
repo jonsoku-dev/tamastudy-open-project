@@ -1,0 +1,3 @@
+mutation deleteGourmetComment($gourmetCommentId: String!) {
+    deleteGourmetComment(gourmetCommentId: $gourmetCommentId)
+}

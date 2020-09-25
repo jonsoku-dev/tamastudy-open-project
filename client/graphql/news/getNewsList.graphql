@@ -1,11 +1,11 @@
 query GetNewsList {
-    krBoardList: getNewsList(filter: { flag: KR }) {
+    krBoardList: getNewsList(flag: KR) {
         ...getNewsListFields
     }
-    jpBoardList: getNewsList(filter: { flag: JP }) {
+    jpBoardList: getNewsList(flag: JP) {
         ...getNewsListFields
     }
-    usBoardList: getNewsList(filter: { flag: US }) {
+    usBoardList: getNewsList(flag: US) {
         ...getNewsListFields
     }
 }

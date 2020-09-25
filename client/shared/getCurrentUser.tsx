@@ -20,6 +20,7 @@ export const CurrentUserProvider: React.FC<any> = ({ children }) => {
   const { data } = useQuery<CurrentUserQuery>(CurrentUserDocument, {
     fetchPolicy: 'cache-first',
   });
+  console.log(data);
   const store = {
     userId: data?.currentUser?.id,
     username: data?.currentUser?.username,

@@ -7,8 +7,8 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Auth } from '../../auth/entities/auth.entity';
-import { createBoardCommentRequestDto } from '../dto/create-board-comment-request.dto';
-import { editBoardCommentRequestDto } from '../dto/edit-board-comment-request.dto';
+import { CreateBoardCommentRequestDto } from '../dto/createBoardCommentRequest.dto';
+import { EditBoardCommentRequestDto } from '../dto/editBoardCommentRequest.dto';
 
 @EntityRepository(BoardComment)
 export class BoardCommentRepository extends Repository<BoardComment> {
@@ -17,7 +17,7 @@ export class BoardCommentRepository extends Repository<BoardComment> {
   async createBoardComment(
     user: Auth,
     boardId: string,
-    createBoardCommentRequestDto: createBoardCommentRequestDto,
+    createBoardCommentRequestDto: CreateBoardCommentRequestDto,
   ) {
     try {
       const query = this.createQueryBuilder('board_comment');
@@ -60,7 +60,7 @@ export class BoardCommentRepository extends Repository<BoardComment> {
   async editBoardComment(
     user: Auth,
     boardCommentId: string,
-    editBoardCommentRequestDto: editBoardCommentRequestDto,
+    editBoardCommentRequestDto: EditBoardCommentRequestDto,
   ) {
     const found = await this.getAuthorBoardComment(user, boardCommentId);
     const query = this.createQueryBuilder('board_comment');

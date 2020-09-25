@@ -35,6 +35,7 @@ const BoardCreateAndUpdate: React.FC<BoardCreateAndUpdateProps> = ({
 }) => {
   const router = useRouter();
 
+  const [file, setFile] = useState('');
   const [formData, setFormData] = useState({
     category: BoardCategory.Job,
     title: '',
@@ -54,7 +55,6 @@ const BoardCreateAndUpdate: React.FC<BoardCreateAndUpdateProps> = ({
       refetchQueries: [{ query: GetBoardListDocument }],
     },
   );
-  console.log(editData?.category);
   const { register, handleSubmit, reset } = useForm({
     mode: 'all',
     defaultValues: {
@@ -63,6 +63,15 @@ const BoardCreateAndUpdate: React.FC<BoardCreateAndUpdateProps> = ({
       desc: isEdit ? editData?.desc : '',
     },
   });
+
+  const onChange = ({
+    target: {
+      validity,
+      files: [file],
+    },
+  }: any) => {
+    return validity.valid && setFile(file);
+  };
 
   const onSubmit = handleSubmit(async (data: { title: string; desc: string }) => {
     const input = {
@@ -81,6 +90,7 @@ const BoardCreateAndUpdate: React.FC<BoardCreateAndUpdateProps> = ({
         await createBoardMutation({
           variables: {
             input,
+            file,
           },
         });
       }
@@ -124,6 +134,16 @@ const BoardCreateAndUpdate: React.FC<BoardCreateAndUpdateProps> = ({
         </CreateItemFrame>
         <CreateItemFrame name={'Desc'} isRequired>
           <S.Textarea name={'desc'} ref={register} placeholder={'Write your desc here...'} />
+        </CreateItemFrame>
+        <CreateItemFrame name={'Images'}>
+          {!file && <input type="file" onChange={onChange} />}
+          {file && (
+            <img
+              src={URL.createObjectURL(file)}
+              alt={file}
+              style={{ width: '300px', height: '300px' }}
+            />
+          )}
         </CreateItemFrame>
         <S.Submit>
           <button type={'submit'}>Submit</button>

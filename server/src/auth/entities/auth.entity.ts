@@ -19,6 +19,9 @@ import { BoardComment } from '../../board/entities/board-comment.entity';
 import { PostComment } from '../../post/post-comment.entity';
 import { BoardLike } from '../../board/entities/board-like.entity';
 import { AuthInterface } from '../interface/auth.interface';
+import { BoardCommentReply } from '../../board/entities/board-comment-reply.entity';
+import { Gourmet } from '../../gourmet/entities/gourmet.entity';
+import { GourmetComment } from '../../gourmet/entities/gourmetComment.entity';
 
 @ObjectType({
   implements: [AuthInterface],
@@ -57,10 +60,22 @@ export class Auth extends BaseEntity implements AuthInterface {
   boards: Board[];
 
   @OneToMany(() => BoardComment, (boardComments) => boardComments.user)
-  boardComments: Board[];
+  boardComments: BoardComment[];
+
+  @OneToMany(
+    () => BoardCommentReply,
+    (boardCommentReply) => boardCommentReply.user,
+  )
+  boardCommentReplies: BoardCommentReply[];
 
   @OneToMany(() => BoardLike, (boardLikes) => boardLikes.user)
   boardLikes: BoardLike[];
+
+  @OneToMany(() => Gourmet, (gourmet) => gourmet.user)
+  gourmets: Gourmet[];
+
+  @OneToMany(() => GourmetComment, (gourmetComments) => gourmetComments.user)
+  gourmetComments: GourmetComment[];
 
   @ManyToMany(() => Auth, (user) => user.following)
   @JoinTable({

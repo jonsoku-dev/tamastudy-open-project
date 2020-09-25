@@ -3,16 +3,15 @@ import { News } from './news.entity';
 import { GetNewsListResponse } from './response/get-news-list.response';
 import { NotFoundException } from '@nestjs/common';
 import { NewsFlagFilter } from './filter/news-flag.filter';
+import { NewsFlagEnum } from './enum/news-flag.enum';
 
 @EntityRepository(News)
 export class NewsRepository extends Repository<News> {
-  async getNewsList(filter: NewsFlagFilter): Promise<GetNewsListResponse[]> {
+  async getNewsList(flag: NewsFlagEnum): Promise<GetNewsListResponse[]> {
     try {
       const query = this.createQueryBuilder().select();
-      if (filter) {
-        if (filter.flag) {
-          query.andWhere('flag = :flag', { flag: filter.flag });
-        }
+      if (flag) {
+        query.andWhere('flag = :flag', { flag });
       }
       return await query.getMany();
     } catch (e) {

@@ -18,11 +18,11 @@ const Side: React.FC<SideProps> = () => {
         onExited={() => setShowMenu(false)}
       >
         <S.Content>
+          <S.Link href={'/notice'} onClick={() => setShowMenu(false)} name={'Notice'} />
           <S.Link href={'/board'} onClick={() => setShowMenu(false)} name={'Board'} />
-          <S.Link href={'/board'} onClick={() => setShowMenu(false)} name={'Board'} />
-          <S.Link href={'/board'} onClick={() => setShowMenu(false)} name={'Board'} />
-          <S.Link href={'/board'} onClick={() => setShowMenu(false)} name={'Board'} />
-          <S.Link href={'/board'} onClick={() => setShowMenu(false)} name={'Board'} />
+          <S.Link href={'/post'} onClick={() => setShowMenu(false)} name={'Post'} />
+          <S.Link href={'/gourmet'} onClick={() => setShowMenu(false)} name={'Gourmet'} />
+          <S.Link href={'/openchat'} onClick={() => setShowMenu(false)} name={'Openchat'} />
         </S.Content>
       </CSSTransition>
     </S.Wrapper>

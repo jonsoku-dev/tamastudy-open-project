@@ -11,7 +11,7 @@ import {
   RegisterMutation,
 } from '../generated/graphql';
 import { useRouter } from 'next/router';
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 
 export interface IAuthContext {
   registerMutation: (

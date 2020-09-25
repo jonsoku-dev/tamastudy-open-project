@@ -6,28 +6,45 @@ import MainBoardList from '../../organisms/MainBoardList/MainBoardList';
 import MainNewsList from '../../organisms/MainNewsList/MainNewsList';
 import MainTop from '../../organisms/MainTop/MainTop';
 import MainOpenChat from '../../organisms/MainOpenChat/MainOpenChat';
+import { useGetMainDataQuery } from '../../../generated/graphql';
 
 export interface MainProps {}
 
 const Main: React.FC<MainProps> = () => {
-  const [width, height] = useWindowSize();
-  console.log(width);
+  const { data } = useGetMainDataQuery();
+  const [, height] = useWindowSize();
+  if (!data) {
+    return null;
+  }
   return (
     <S.Wrapper>
       <S.Section1 height={height}>
         <MainTop />
       </S.Section1>
       <S.Section2 height={height}>
-        <NoticeList />
+        <NoticeList data={data.getNoticeList} />
       </S.Section2>
       <S.Section3 height={height}>
-        <MainBoardList />
+        <MainBoardList
+          data={{
+            jobBoardList: data.jobBoardList,
+            tradeBoardList: data.tradeBoardList,
+            freeBoardList: data.freeBoardList,
+            fqBoardList: data.fqBoardList,
+          }}
+        />
       </S.Section3>
       <S.Section4 height={height}>
-        <MainNewsList />
+        <MainNewsList
+          data={{
+            usBoardList: data.usBoardList,
+            jpBoardList: data.jpBoardList,
+            krBoardList: data.krBoardList,
+          }}
+        />
       </S.Section4>
       <S.Section5 height={height}>
-        <MainOpenChat />
+        <MainOpenChat data={data.getOpenchatList} />
       </S.Section5>
       {/*<S.Section5 height={height / 4}>*/}
       {/*  Footer*/}

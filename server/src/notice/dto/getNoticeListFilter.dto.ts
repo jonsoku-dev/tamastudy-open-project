@@ -8,4 +8,14 @@ export class GetNoticeListFilterDto {
   @Type(() => String)
   @IsOptional()
   search: string;
+
+  @Field({ nullable: true })
+  @Type(() => Number)
+  @IsOptional()
+  limit: number;
+
+  @Field({ nullable: true })
+  @Type(() => Number)
+  @IsOptional()
+  offset: number;
 }

@@ -1,0 +1,29 @@
+query getGourmet($gourmetId: String!) {
+    getGourmet(gourmetId: $gourmetId) {
+        id
+        name
+        desc
+        category
+        score
+        lat
+        lng
+        images
+        createdAt
+        updatedAt
+        user {
+            id
+            username
+            email
+            avatar
+        }
+        comments {
+            id
+            user {
+                id
+                username
+                email
+                avatar
+            }
+        }
+    }
+}

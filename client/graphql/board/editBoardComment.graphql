@@ -1,5 +1,5 @@
 mutation editBoardComment(
-    $input: editBoardCommentRequestDto!
+    $input: EditBoardCommentRequestDto!
     $boardCommentId: String!
 ) {
     editBoardComment(input: $input, boardCommentId: $boardCommentId)

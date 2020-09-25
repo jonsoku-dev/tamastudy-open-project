@@ -7,16 +7,22 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Auth } from '../../auth/entities/auth.entity';
-import { createBoardRequestDto } from '../dto/create-board-request.dto';
-import { editBoardRequestDto } from '../dto/edit-board-request.dto';
+import { CreateBoardRequestDto } from '../dto/createBoardRequest.dto';
+import { EditBoardRequestDto } from '../dto/editBoardRequest.dto';
 import { BoardCategory } from '../enum/board-category.enum';
 import { CursorPaginationQueryDto } from '../../common/dto/cursor-pagination-query.dto';
-import { GetBoardListFilterDto } from '../dto/get-board-list-filter.dto';
-import { GetBoardDto } from '../dto/get-board.dto';
+import { GetBoardListFilterDto } from '../dto/getBoardListFilter.dto';
+import { GetBoardRequestDto } from '../dto/getBoardRequest.dto';
+import { FileUpload } from 'graphql-upload';
+import { createWriteStream } from 'fs';
 
 @EntityRepository(Board)
 export class BoardRepository extends Repository<Board> {
   private logger = new Logger('BoardRepository');
+
+  async uploadFile(filename: string) {
+    return '';
+  }
 
   async getBoardListByCategory(category: BoardCategory) {
     const query = this.createQueryBuilder('board');
@@ -25,12 +31,11 @@ export class BoardRepository extends Repository<Board> {
         .leftJoinAndSelect('board.user', 'user')
         .leftJoinAndSelect('board.comments', 'comments')
         .leftJoinAndSelect('board.likes', 'likes')
-        .take(5)
         .where('board.category = :category', {
           category,
         })
-        .orderBy('board.id', 'DESC')
-        .cache(true)
+        // .loadRelationCountAndMap('board.likesCount', 'board.likes')
+        .take(5)
         .getMany();
     } catch (e) {
       this.logger.error('게시판불러오기에 실패하였습니다. ', e.stack);
@@ -45,7 +50,7 @@ export class BoardRepository extends Repository<Board> {
     getBoardListFilterDto: GetBoardListFilterDto,
     cursorPaginationQueryDto: CursorPaginationQueryDto,
   ) {
-    let limit = 8;
+    let limit = 10;
     const query = this.createQueryBuilder('board');
     if (getBoardListFilterDto) {
       const { search, category } = getBoardListFilterDto;
@@ -72,11 +77,10 @@ export class BoardRepository extends Repository<Board> {
     try {
       let boards = await query
         .leftJoinAndSelect('board.user', 'user')
-        .leftJoinAndSelect('board.comments', 'comments')
         .leftJoinAndSelect('board.likes', 'likes')
+        .leftJoinAndSelect('board.comments', 'comments')
         .take(limit + 1)
         .orderBy('board.id', 'DESC')
-        .cache(true)
         .getMany();
 
       this.logger.debug(boards.length);
@@ -115,9 +119,15 @@ export class BoardRepository extends Repository<Board> {
   async getBoardNotIncrementView(boardId: string): Promise<Board> {
     const query = this.createQueryBuilder('board')
       .leftJoinAndSelect('board.user', 'user')
-      .leftJoinAndSelect('board.comments', 'comments')
       .leftJoinAndSelect('board.likes', 'likes')
-      .orderBy('comments.createdAt', 'DESC');
+      .leftJoinAndSelect('board.comments', 'comments')
+      .leftJoinAndSelect('comments.user', 'commentUser')
+      .leftJoinAndSelect('comments.boardCommentReplies', 'boardCommentReplies')
+      .leftJoinAndSelect('boardCommentReplies.user', 'replyUser')
+      .orderBy({
+        'comments.id': 'DESC',
+        'comments.createdAt': 'DESC',
+      });
     const found = await query
       .where('board.id = :boardId', { boardId })
       .getOne();
@@ -130,7 +140,7 @@ export class BoardRepository extends Repository<Board> {
     return found;
   }
 
-  async getBoard(getBoardTdo: GetBoardDto): Promise<Board> {
+  async getBoard(getBoardTdo: GetBoardRequestDto): Promise<Board> {
     const found = await this.getBoardNotIncrementView(getBoardTdo.boardId);
     if (!getBoardTdo.isRefetch) {
       await this.increment({ id: found.id }, 'view', 1);
@@ -146,9 +156,26 @@ export class BoardRepository extends Repository<Board> {
     return found;
   }
 
-  async createBoard(user: Auth, createBoardRequestDto: createBoardRequestDto) {
-    const query = this.createQueryBuilder('board');
+  async createBoard(
+    user: Auth,
+    createBoardRequestDto: CreateBoardRequestDto,
+    fileUpload: FileUpload,
+  ) {
     try {
+      if (fileUpload) {
+        const { filename, createReadStream } = fileUpload;
+        console.log(filename);
+        new Promise(async (resolve, reject) =>
+          createReadStream()
+            .pipe(createWriteStream(`./client/uploads/${filename}`))
+            .on('finish', () => resolve(true))
+            .on('error', (err) => {
+              console.log(err);
+              return reject(false);
+            }),
+        );
+      }
+      const query = this.createQueryBuilder('board');
       await query
         .insert()
         .into(Board)
@@ -157,9 +184,12 @@ export class BoardRepository extends Repository<Board> {
           desc: createBoardRequestDto.desc,
           category: createBoardRequestDto.category,
           userId: user.id,
+          filepath: fileUpload
+            ? `http://localhost:5000/uploads/${fileUpload.filename}`
+            : '',
         })
         .execute();
-      this.logger.error(`Board 생성 성공`);
+      this.logger.verbose(`Board 생성 성공`);
       return 'success';
     } catch (e) {
       console.log(e);
@@ -174,7 +204,7 @@ export class BoardRepository extends Repository<Board> {
   async editBoard(
     boardId: string,
     user: Auth,
-    editBoardRequestDto: editBoardRequestDto,
+    editBoardRequestDto: EditBoardRequestDto,
   ): Promise<string> {
     const found = await this.getAuthorBoard(boardId, user);
     const query = this.createQueryBuilder('board');

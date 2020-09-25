@@ -5,6 +5,7 @@ query getBoard($boardId: String!, $isRefetch: Boolean) {
         desc
         view
         category
+        filepath
         createdAt
         updatedAt
         user {
@@ -22,6 +23,17 @@ query getBoard($boardId: String!, $isRefetch: Boolean) {
                 username
                 email
                 avatar
+            }
+            boardCommentReplies{
+                id
+                body
+                createdAt
+                user {
+                    id
+                    username
+                    email
+                    avatar
+                }
             }
         }
         likes {

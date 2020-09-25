@@ -1,6 +1,5 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { NoticeService } from './notice.service';
-import { Notice } from './entities/notice.entity';
 import { CreateNoticeRequestDto } from './dto/createNoticeRequest.dto';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../auth/guard/graphql-auth.guard';
@@ -16,9 +15,7 @@ export class NoticeResolver {
   constructor(private noticeService: NoticeService) {}
 
   @Query(() => [GetNoticeListResponseDto])
-  getNoticeList(
-    @Args() getNoticeListFilterDto: GetNoticeListFilterDto
-  ) {
+  getNoticeList(@Args() getNoticeListFilterDto: GetNoticeListFilterDto) {
     return this.noticeService.getNoticeList(getNoticeListFilterDto);
   }
 

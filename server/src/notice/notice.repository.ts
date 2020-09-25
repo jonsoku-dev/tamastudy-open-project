@@ -21,23 +21,23 @@ export class NoticeRepository extends Repository<Notice> {
     getNoticeListFilterDto: GetNoticeListFilterDto,
   ): Promise<GetNoticeListResponseDto[]> {
     try {
-      const query = this.createQueryBuilder('notice');
+      const query = this.createQueryBuilder('notice')
+        .leftJoinAndSelect('notice.user', 'user')
       if (getNoticeListFilterDto) {
-        const { search } = getNoticeListFilterDto;
+        const { search, limit, offset } = getNoticeListFilterDto;
         if (search) {
           query.andWhere('notice.title LIKE :search', {
             search: `%${search}%`,
           });
         }
+        if (limit) {
+          query.take(limit);
+        }
+        if (offset) {
+          query.skip(offset);
+        }
       }
-      const result = await query
-        .leftJoinAndSelect('notice.user', 'user')
-        .orderBy({
-          'notice.createdAt': 'DESC',
-          'notice.id': 'DESC',
-        })
-        .cache(true)
-        .getMany();
+      const result = await query.getMany();
       this.logger.verbose('getNoticeList success');
       return result;
     } catch (e) {
