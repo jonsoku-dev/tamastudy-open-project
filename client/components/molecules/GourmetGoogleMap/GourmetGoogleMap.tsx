@@ -1,6 +1,10 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import { GetGourmetListResponseDto } from '../../../generated/graphql';
+import * as S from './GourmetGoogleMap.styled';
+import MyMarker from './MyMarker';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export interface GourmetGoogleMapProps {
   center: {
@@ -8,24 +12,52 @@ export interface GourmetGoogleMapProps {
     lng: number;
   };
   data: GetGourmetListResponseDto[];
+  setCenter: any;
+  selectedId: any;
+  handleChangeId: any;
 }
 
-const AnyReactComponent = ({ text }: any) => <div>{text}</div>;
+const GourmetGoogleMap: React.FC<GourmetGoogleMapProps> = ({
+  setCenter,
+  center,
+  selectedId,
+  data,
+  handleChangeId,
+}) => {
+  const onDragEnd = async (e: any) => {
+    await setCenter({
+      lat: e.center.lat(),
+      lng: e.center.lng(),
+    });
+  };
 
-const GourmetGoogleMap: React.FC<GourmetGoogleMapProps> = ({ center, data }) => {
-  console.log(center);
   return (
-    <div style={{ height: '400px', width: 'auto' }}>
+    <S.Wrapper>
       <GoogleMapReact
         bootstrapURLKeys={{ key: 'AIzaSyCafX8PxjVI-XCHsJ9bFeFbJPnwaZ4cc0M' }}
         center={center}
         zoom={14}
+        onDragEnd={onDragEnd}
       >
-        {data.map((item) => (
-          <AnyReactComponent key={item.id} text={'My Marker'} lat={item.lat} lng={item.lng} />
-        ))}
+        {data.map((item) => {
+          return (
+            <MyMarker
+              key={item.id}
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              lat={item.lat}
+              lng={item.lng}
+              item={item}
+              selectedId={selectedId}
+              handleChangeId={handleChangeId}
+            />
+          );
+        })}
       </GoogleMapReact>
-    </div>
+      <S.Center>
+        <FontAwesomeIcon icon={faTimes} />
+      </S.Center>
+    </S.Wrapper>
   );
 };
 

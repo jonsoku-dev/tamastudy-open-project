@@ -6,12 +6,31 @@ import GourmetGoogleMap from '../../molecules/GourmetGoogleMap/GourmetGoogleMap'
 export interface GourmetMapProps {
   center: any;
   data: GetGourmetListResponseDto[];
+  setCenter: any;
+  selectedId: any;
+  handleChangeId: any;
 }
 
-const GourmetMap: React.FC<GourmetMapProps> = ({ center, data }) => {
+const GourmetMap: React.FC<GourmetMapProps> = ({
+  center,
+  data,
+  setCenter,
+  selectedId,
+  handleChangeId,
+}) => {
   return (
     <S.Wrapper>
-      <S.Map>{<GourmetGoogleMap center={center} data={data} />}</S.Map>
+      <S.Map>
+        {
+          <GourmetGoogleMap
+            setCenter={setCenter}
+            center={center}
+            data={data}
+            selectedId={selectedId}
+            handleChangeId={handleChangeId}
+          />
+        }
+      </S.Map>
     </S.Wrapper>
   );
 };

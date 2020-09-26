@@ -31,10 +31,11 @@ const Gourmet: React.FC<GourmetProps> = () => {
       alert(message);
     },
   });
+
   const handleSearch = async ({ category, score, search }: ISearchData) => {
     await refetch({
-      lat: '90',
-      lng: '120',
+      lat: String(center.lat),
+      lng: String(center.lng),
       category,
       score,
       search,
@@ -77,7 +78,13 @@ const Gourmet: React.FC<GourmetProps> = () => {
   return (
     <S.Wrapper>
       <GourmetSearch handleSearch={handleSearch} />
-      <GourmetMap center={center} data={data.getGourmetList as GetGourmetListResponseDto[]} />
+      <GourmetMap
+        center={center}
+        setCenter={setCenter}
+        selectedId={id}
+        handleChangeId={handleChangeId}
+        data={data.getGourmetList as GetGourmetListResponseDto[]}
+      />
       <GourmetList
         data={data.getGourmetList as GetGourmetListResponseDto[]}
         selectedId={id}
