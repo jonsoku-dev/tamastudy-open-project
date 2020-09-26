@@ -145,8 +145,8 @@ type Gourmet implements GourmetInterface {
   desc: String!
   category: GourmetCategory!
   score: Float!
-  lat: Float!
-  lng: Float!
+  lat: String!
+  lng: String!
   address: String!
   images: String
   createdAt: DateTime!
@@ -161,8 +161,8 @@ interface GourmetInterface {
   desc: String!
   category: GourmetCategory!
   score: Float!
-  lat: Float!
-  lng: Float!
+  lat: String!
+  lng: String!
   address: String!
   images: String
   createdAt: DateTime!
@@ -303,8 +303,8 @@ type GetGourmetListResponseDto {
   desc: String!
   category: GourmetCategory!
   score: Float!
-  lat: Float!
-  lng: Float!
+  lat: String!
+  lng: String!
   address: String!
   images: String
   createdAt: DateTime!
@@ -319,8 +319,8 @@ type GetGourmetResponseDto {
   desc: String!
   category: GourmetCategory!
   score: Float!
-  lat: Float!
-  lng: Float!
+  lat: String!
+  lng: String!
   address: String!
   images: String
   createdAt: DateTime!
@@ -341,7 +341,7 @@ type Query {
   getPlaceholder: [PlaceholderResponse!]!
   getNewsList(flag: NewsFlagEnum!): [GetNewsListResponse!]!
   getOpenchatList(category: OpenchatCategory, take: Float, offset: Float, search: String): [GetOpenchatListResponseDto!]!
-  getGourmetList(search: String, category: GourmetCategory, limit: Float, offset: Float, score: Float, lat: Float!, lng: Float!): [GetGourmetListResponseDto!]!
+  getGourmetList(search: String, category: GourmetCategory, limit: Float, offset: Float, score: Float, lat: String!, lng: String!): [GetGourmetListResponseDto!]!
   getGourmet(gourmetId: String!): GetGourmetResponseDto!
 }
 
@@ -471,8 +471,8 @@ input CreateGourmetRequestDto {
   desc: String!
   category: GourmetCategory!
   score: Int!
-  lat: Float!
-  lng: Float!
+  lat: String!
+  lng: String!
   address: String!
   images: String
 }
@@ -482,8 +482,8 @@ input EditGourmetRequestDto {
   desc: String
   category: GourmetCategory
   score: Int
-  lat: Float
-  lng: Float
+  lat: String
+  lng: String
   address: String
   images: String
 }

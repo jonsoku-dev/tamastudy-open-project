@@ -29,8 +29,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       query: GetGourmetDocument,
       fetchPolicy: 'cache-first',
       variables: {
-        lat: 0,
-        lng: 0,
+        lat: "35.5991552",
+        lng: "139.6211712",
       },
     });
   } catch (error) {

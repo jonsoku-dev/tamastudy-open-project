@@ -1,17 +1,17 @@
 import React from 'react';
 import * as S from './GourmetMap.styled';
 import { GetGourmetListResponseDto } from '../../../generated/graphql';
+import GourmetGoogleMap from '../../molecules/GourmetGoogleMap/GourmetGoogleMap';
 
 export interface GourmetMapProps {
+  center: any;
   data: GetGourmetListResponseDto[];
 }
 
-const GourmetMap: React.FC<GourmetMapProps> = ({ data }) => {
+const GourmetMap: React.FC<GourmetMapProps> = ({ center, data }) => {
   return (
     <S.Wrapper>
-      {data.map((item) => (
-        <div key={item.id}>{item.name}</div>
-      ))}
+      <S.Map>{<GourmetGoogleMap center={center} data={data} />}</S.Map>
     </S.Wrapper>
   );
 };

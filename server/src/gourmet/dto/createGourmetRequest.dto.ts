@@ -1,8 +1,6 @@
-import { Field, Float, InputType, Int } from '@nestjs/graphql';
+import { Field, InputType, Int } from '@nestjs/graphql';
 import {
   IsInt,
-  IsLatitude,
-  IsLongitude,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -34,19 +32,15 @@ export class CreateGourmetRequestDto {
   @Max(5)
   score: number;
 
-  @Field(() => Float)
-  @IsLatitude()
-  @Min(-90)
-  @Max(90)
+  @Field(() => String)
+  @IsString()
   @IsNotEmpty()
-  lat: number;
+  lat: string;
 
-  @Field(() => Float)
-  @IsLongitude()
-  @Min(-180)
-  @Max(180)
+  @Field(() => String)
+  @IsString()
   @IsNotEmpty()
-  lng: number;
+  lng: string;
 
   @Field(() => String)
   @IsString()

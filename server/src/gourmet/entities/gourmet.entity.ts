@@ -38,10 +38,10 @@ export class Gourmet extends BaseEntity implements GourmetInterface {
   score: number;
 
   @Column()
-  lat: number;
+  lat: string;
 
   @Column()
-  lng: number;
+  lng: string;
 
   @Column()
   address: string;

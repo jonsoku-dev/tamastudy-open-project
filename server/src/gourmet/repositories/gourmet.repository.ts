@@ -103,6 +103,7 @@ export class GourmetRepository extends Repository<Gourmet> {
     createGourmetRequestDto: CreateGourmetRequestDto,
   ): Promise<Gourmet> {
     try {
+      console.log(createGourmetRequestDto.lat);
       return await this.create({
         userId: user.id,
         ...createGourmetRequestDto,

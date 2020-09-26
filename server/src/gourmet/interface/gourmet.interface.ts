@@ -25,11 +25,11 @@ export abstract class GourmetInterface {
   @Field(() => Float)
   score: number;
 
-  @Field(() => Float)
-  lat: number;
+  @Field(() => String)
+  lat: string;
 
-  @Field(() => Float)
-  lng: number;
+  @Field(() => String)
+  lng: string;
 
   @Field(() => String)
   address: string;

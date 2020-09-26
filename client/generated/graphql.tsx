@@ -162,8 +162,8 @@ export type Gourmet = GourmetInterface & {
   desc: Scalars['String'];
   category: GourmetCategory;
   score: Scalars['Float'];
-  lat: Scalars['Float'];
-  lng: Scalars['Float'];
+  lat: Scalars['String'];
+  lng: Scalars['String'];
   address: Scalars['String'];
   images?: Maybe<Scalars['String']>;
   createdAt: Scalars['DateTime'];
@@ -178,8 +178,8 @@ export type GourmetInterface = {
   desc: Scalars['String'];
   category: GourmetCategory;
   score: Scalars['Float'];
-  lat: Scalars['Float'];
-  lng: Scalars['Float'];
+  lat: Scalars['String'];
+  lng: Scalars['String'];
   address: Scalars['String'];
   images?: Maybe<Scalars['String']>;
   createdAt: Scalars['DateTime'];
@@ -332,8 +332,8 @@ export type GetGourmetListResponseDto = {
   desc: Scalars['String'];
   category: GourmetCategory;
   score: Scalars['Float'];
-  lat: Scalars['Float'];
-  lng: Scalars['Float'];
+  lat: Scalars['String'];
+  lng: Scalars['String'];
   address: Scalars['String'];
   images?: Maybe<Scalars['String']>;
   createdAt: Scalars['DateTime'];
@@ -349,8 +349,8 @@ export type GetGourmetResponseDto = {
   desc: Scalars['String'];
   category: GourmetCategory;
   score: Scalars['Float'];
-  lat: Scalars['Float'];
-  lng: Scalars['Float'];
+  lat: Scalars['String'];
+  lng: Scalars['String'];
   address: Scalars['String'];
   images?: Maybe<Scalars['String']>;
   createdAt: Scalars['DateTime'];
@@ -437,8 +437,8 @@ export type QueryGetGourmetListArgs = {
   limit?: Maybe<Scalars['Float']>;
   offset?: Maybe<Scalars['Float']>;
   score?: Maybe<Scalars['Float']>;
-  lat: Scalars['Float'];
-  lng: Scalars['Float'];
+  lat: Scalars['String'];
+  lng: Scalars['String'];
 };
 
 
@@ -755,8 +755,8 @@ export type CreateGourmetRequestDto = {
   desc: Scalars['String'];
   category: GourmetCategory;
   score: Scalars['Int'];
-  lat: Scalars['Float'];
-  lng: Scalars['Float'];
+  lat: Scalars['String'];
+  lng: Scalars['String'];
   address: Scalars['String'];
   images?: Maybe<Scalars['String']>;
 };
@@ -766,8 +766,8 @@ export type EditGourmetRequestDto = {
   desc?: Maybe<Scalars['String']>;
   category?: Maybe<GourmetCategory>;
   score?: Maybe<Scalars['Int']>;
-  lat?: Maybe<Scalars['Float']>;
-  lng?: Maybe<Scalars['Float']>;
+  lat?: Maybe<Scalars['String']>;
+  lng?: Maybe<Scalars['String']>;
   address?: Maybe<Scalars['String']>;
   images?: Maybe<Scalars['String']>;
 };
@@ -1177,8 +1177,8 @@ export type GetGourmetListQueryVariables = Exact<{
   limit?: Maybe<Scalars['Float']>;
   offset?: Maybe<Scalars['Float']>;
   score?: Maybe<Scalars['Float']>;
-  lat: Scalars['Float'];
-  lng: Scalars['Float'];
+  lat: Scalars['String'];
+  lng: Scalars['String'];
 }>;
 
 
@@ -2205,7 +2205,7 @@ export type GetGourmetQueryHookResult = ReturnType<typeof useGetGourmetQuery>;
 export type GetGourmetLazyQueryHookResult = ReturnType<typeof useGetGourmetLazyQuery>;
 export type GetGourmetQueryResult = Apollo.QueryResult<GetGourmetQuery, GetGourmetQueryVariables>;
 export const GetGourmetListDocument = gql`
-    query getGourmetList($search: String, $category: GourmetCategory, $limit: Float, $offset: Float, $score: Float, $lat: Float!, $lng: Float!) {
+    query getGourmetList($search: String, $category: GourmetCategory, $limit: Float, $offset: Float, $score: Float, $lat: String!, $lng: String!) {
   getGourmetList(search: $search, category: $category, limit: $limit, offset: $offset, score: $score, lat: $lat, lng: $lng) {
     id
     name

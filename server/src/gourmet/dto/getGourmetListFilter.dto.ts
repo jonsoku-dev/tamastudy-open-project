@@ -31,17 +31,13 @@ export class GetGourmetListFilterDto {
   @Max(5)
   score: number;
 
-  @Field(() => Float)
+  @Field(() => String)
   @IsNotEmpty()
-  @IsLatitude()
-  @Min(-90)
-  @Max(90)
-  lat: number;
+  @IsString()
+  lat: string;
 
-  @Field(() => Float)
+  @Field(() => String)
   @IsNotEmpty()
-  @IsLongitude()
-  @Min(-180)
-  @Max(180)
-  lng: number;
+  @IsString()
+  lng: string;
 }
