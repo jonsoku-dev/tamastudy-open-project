@@ -100,13 +100,12 @@ export type Board = BoardInterface & {
   desc: Scalars['String'];
   view: Scalars['Float'];
   category: BoardCategory;
-  filepath: Scalars['String'];
   createdAt: Scalars['DateTime'];
   updatedAt: Scalars['DateTime'];
   user: Auth;
   comments: Array<BoardComment>;
   likes: Array<BoardLike>;
-  likesCount: Scalars['Float'];
+  filepath: Scalars['String'];
 };
 
 export type BoardInterface = {
@@ -115,13 +114,12 @@ export type BoardInterface = {
   desc: Scalars['String'];
   view: Scalars['Float'];
   category: BoardCategory;
-  filepath: Scalars['String'];
   createdAt: Scalars['DateTime'];
   updatedAt: Scalars['DateTime'];
   user: Auth;
   comments: Array<BoardComment>;
   likes: Array<BoardLike>;
-  likesCount: Scalars['Float'];
+  filepath: Scalars['String'];
 };
 
 export enum BoardCategory {
@@ -784,6 +782,11 @@ export type EditGourmetCommentRequestDto = {
   images?: Maybe<Scalars['String']>;
 };
 
+export type Subscription = {
+  __typename?: 'Subscription';
+  followSubscription: Auth;
+};
+
 export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -792,6 +795,17 @@ export type CurrentUserQuery = (
   & { currentUser: (
     { __typename?: 'Auth' }
     & Pick<Auth, 'id' | 'username' | 'email' | 'avatar'>
+  ) }
+);
+
+export type FollowSubscriptionSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FollowSubscriptionSubscription = (
+  { __typename?: 'Subscription' }
+  & { followSubscription: (
+    { __typename?: 'Auth' }
+    & Pick<Auth, 'id'>
   ) }
 );
 
@@ -1311,6 +1325,34 @@ export function useCurrentUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type CurrentUserQueryHookResult = ReturnType<typeof useCurrentUserQuery>;
 export type CurrentUserLazyQueryHookResult = ReturnType<typeof useCurrentUserLazyQuery>;
 export type CurrentUserQueryResult = Apollo.QueryResult<CurrentUserQuery, CurrentUserQueryVariables>;
+export const FollowSubscriptionDocument = gql`
+    subscription followSubscription {
+  followSubscription {
+    id
+  }
+}
+    `;
+
+/**
+ * __useFollowSubscriptionSubscription__
+ *
+ * To run a query within a React component, call `useFollowSubscriptionSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useFollowSubscriptionSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFollowSubscriptionSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useFollowSubscriptionSubscription(baseOptions?: Apollo.SubscriptionHookOptions<FollowSubscriptionSubscription, FollowSubscriptionSubscriptionVariables>) {
+        return Apollo.useSubscription<FollowSubscriptionSubscription, FollowSubscriptionSubscriptionVariables>(FollowSubscriptionDocument, baseOptions);
+      }
+export type FollowSubscriptionSubscriptionHookResult = ReturnType<typeof useFollowSubscriptionSubscription>;
+export type FollowSubscriptionSubscriptionResult = Apollo.SubscriptionResult<FollowSubscriptionSubscription>;
 export const LoginDocument = gql`
     mutation LOGIN($input: LoginRequest!) {
   login(input: $input) {

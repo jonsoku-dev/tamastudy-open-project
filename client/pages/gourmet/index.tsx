@@ -15,7 +15,7 @@ export interface GourmetProps {}
 
 const Gourmet: React.FC<GourmetProps> = () => {
   return (
-    <BasicLayout title={'Gourmet'}>
+    <BasicLayout title={'Gourmet'} bg>
       <GourmetTemplate />
     </BasicLayout>
   );

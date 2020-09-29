@@ -18,7 +18,11 @@ export class GourmetRepository extends Repository<Gourmet> {
     getGourmetListFilterDto: GetGourmetListFilterDto,
   ): Promise<GetGourmetListResponseDto[]> {
     try {
-      const query = this.createQueryBuilder('gourmet');
+      const query = this.createQueryBuilder('gourmet')
+        .select()
+        .leftJoinAndSelect('gourmet.user', 'user')
+        .leftJoinAndSelect('gourmet.comments', 'comments')
+        .leftJoinAndSelect('comments.user', 'commentUser');
       if (getGourmetListFilterDto) {
         const {
           category,
@@ -56,15 +60,10 @@ export class GourmetRepository extends Repository<Gourmet> {
               'distance',
             )
             .having('distance < 3')
-            .orderBy('distance', 'DESC')
+            .orderBy('distance', 'DESC');
         }
       }
-      const result = await query
-        .leftJoinAndSelect('gourmet.user', 'user')
-        .leftJoinAndSelect('gourmet.comments', 'comments')
-        .leftJoinAndSelect('comments.user', 'commentUser')
-        .getMany();
-      return result;
+      return await query.getMany();
     } catch (e) {
       console.error(e);
       throw new InternalServerErrorException(e);

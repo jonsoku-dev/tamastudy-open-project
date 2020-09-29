@@ -85,13 +85,12 @@ type Board implements BoardInterface {
   desc: String!
   view: Float!
   category: BoardCategory!
-  filepath: String!
   createdAt: DateTime!
   updatedAt: DateTime!
   user: Auth!
   comments: [BoardComment!]!
   likes: [BoardLike!]!
-  likesCount: Float!
+  filepath: String!
 }
 
 interface BoardInterface {
@@ -100,13 +99,12 @@ interface BoardInterface {
   desc: String!
   view: Float!
   category: BoardCategory!
-  filepath: String!
   createdAt: DateTime!
   updatedAt: DateTime!
   user: Auth!
   comments: [BoardComment!]!
   likes: [BoardLike!]!
-  likesCount: Float!
+  filepath: String!
 }
 
 enum BoardCategory {
@@ -352,7 +350,7 @@ input GetPostListFilter {
 type Mutation {
   register(input: RegisterRequest!): Auth!
   login(input: LoginRequest!): LoginResponse!
-  follow(targetUserId: String!): String!
+  follow(targetUserId: String!): Auth!
   unFollow(targetUserId: String!): String!
   createPost(input: CreatePostRequest!): String!
   editPost(input: EditPostRequest!, postId: String!): String!
@@ -498,4 +496,8 @@ input EditGourmetCommentRequestDto {
   body: String
   score: Int
   images: String
+}
+
+type Subscription {
+  followSubscription: Auth!
 }

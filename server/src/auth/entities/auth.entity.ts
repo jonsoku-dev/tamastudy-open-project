@@ -6,7 +6,6 @@ import {
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
-  Unique,
 } from 'typeorm/index';
 import { ObjectType } from '@nestjs/graphql';
 import { IsEmail } from 'class-validator';

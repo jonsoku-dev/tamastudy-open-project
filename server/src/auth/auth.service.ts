@@ -1,4 +1,9 @@
-import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  Logger,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AuthRepository } from './repositories/auth.repository';
 import { RegisterRequest } from './request/register.request';
@@ -14,6 +19,7 @@ export class AuthService {
     private authRepository: AuthRepository,
     private jwtService: JwtService,
   ) {}
+
   async register(registerRequest: RegisterRequest): Promise<Auth> {
     return await this.authRepository.register(registerRequest);
   }
@@ -22,6 +28,15 @@ export class AuthService {
     const user = await this.authRepository.validateUserPassword(loginRequest);
     const payload: IJwtPayload = { email: user.email };
     return this.jwtService.sign(payload);
+  }
+
+  async getUser(userId: string): Promise<Auth> {
+    const user = await this.authRepository.findOne({ where: { id: userId } });
+    if (!user) {
+      throw new NotFoundException();
+    } else {
+      return user;
+    }
   }
 
   follow(targetUserId: string, currentUserId: string) {

@@ -53,18 +53,28 @@ import { GourmetModule } from './gourmet/gourmet.module';
         },
       }),
     }),
-    GraphQLModule.forRoot({
-      autoSchemaFile: 'schema.gql',
-      resolvers: { Upload: GraphQLUpload },
-      context: ({ req, res }) => ({ req, res }),
-      cors: {
-        credentials: true,
-        origin: true,
-      },
-      uploads: {
-        maxFileSize: 10000000, // 10 MB
-        maxFiles: 5,
-      },
+    GraphQLModule.forRootAsync({
+      useFactory: () => ({
+        autoSchemaFile: 'schema.gql',
+        resolvers: { Upload: GraphQLUpload },
+        context: async ({ req, res, connection }) => {
+          // subscriptions
+          if (connection) {
+            return { req: connection.context, res };
+          }
+          // queries and mutations
+          return { req, res };
+        },
+        cors: {
+          credentials: true,
+          origin: true,
+        },
+        uploads: {
+          maxFileSize: 10000000, // 10 MB
+          maxFiles: 5,
+        },
+        installSubscriptionHandlers: true,
+      }),
     }),
     CacheModule.register({
       store: redisStore,

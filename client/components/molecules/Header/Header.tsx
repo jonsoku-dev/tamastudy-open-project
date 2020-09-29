@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { LayoutContext } from '../../../shared/menuHandler';
 import { CurrentUserContext } from '../../../shared/getCurrentUser';
-import { AuthContext } from '../../../shared/authHandler';
+import { useFollowSubscriptionSubscription } from '../../../generated/graphql';
 
 export interface HeaderProps {
   title: string;
@@ -13,9 +13,9 @@ export interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ title, bg = false }) => {
-  const { logout } = useContext(AuthContext);
   const { avatar } = useContext(CurrentUserContext);
   const { setShowMenu } = useContext(LayoutContext);
+  const { data } = useFollowSubscriptionSubscription();
 
   const [showUserInfo, setShowUserInfo] = useState(false);
 
@@ -26,6 +26,8 @@ const Header: React.FC<HeaderProps> = ({ title, bg = false }) => {
   const onMouseLeaveAvatar = useCallback(() => {
     setShowUserInfo(false);
   }, [showUserInfo]);
+
+  console.log(data);
 
   return (
     <S.Wrapper bg={bg}>
@@ -38,22 +40,14 @@ const Header: React.FC<HeaderProps> = ({ title, bg = false }) => {
       <S.Avatar>
         {avatar ? (
           <div onMouseOver={onMouseOverAvatar} onMouseLeave={onMouseLeaveAvatar}>
+            {data && <S.Dot></S.Dot>}
             <Avatar size={36} avatar={avatar} hasCursor />
-            {showUserInfo && (
-              <S.LoggedIn>
-                <S.Link href={'#'} onClick={logout} name={'Logout'} />
-              </S.LoggedIn>
-            )}
+            {showUserInfo && <S.LoggedIn>loggedIn</S.LoggedIn>}
           </div>
         ) : (
           <div onMouseOver={onMouseOverAvatar} onMouseLeave={onMouseLeaveAvatar}>
             <Avatar size={36} hasCursor />
-            {showUserInfo && (
-              <S.LoggedOut>
-                <S.Link href={'/login'} name={'Login'} />
-                <S.Link href={'/register'} name={'Register'} />
-              </S.LoggedOut>
-            )}
+            {showUserInfo && <S.LoggedOut>loggedOut</S.LoggedOut>}
           </div>
         )}
       </S.Avatar>

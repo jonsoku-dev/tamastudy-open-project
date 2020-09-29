@@ -50,7 +50,8 @@
     "rimraf": "^3.0.2",
     "rxjs": "^6.5.4",
     "type-graphql": "^1.0.0",
-    "typeorm": "^0.2.25"
+    "typeorm": "^0.2.25",
+    "typeorm-cursor-pagination": "^0.4.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.0.0",

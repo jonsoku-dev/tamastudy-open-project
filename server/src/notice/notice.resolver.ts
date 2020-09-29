@@ -9,10 +9,14 @@ import { EditNoticeRequestDto } from './dto/editNoticeRequest.dto';
 import { GetNoticeListFilterDto } from './dto/getNoticeListFilter.dto';
 import { GetNoticeListResponseDto } from './dto/getNoticeListResponse.dto';
 import { GetNoticeResponseDto } from './dto/getNoticeResponse.dto';
+import { AuthService } from '../auth/auth.service';
 
 @Resolver()
 export class NoticeResolver {
-  constructor(private noticeService: NoticeService) {}
+  constructor(
+    private noticeService: NoticeService,
+    private authService: AuthService,
+  ) {}
 
   @Query(() => [GetNoticeListResponseDto])
   getNoticeList(@Args() getNoticeListFilterDto: GetNoticeListFilterDto) {

@@ -40,6 +40,16 @@ export const Avatar = styled(Item)`
   position: relative;
 `;
 
+export const Dot = styled.span`
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: red;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+`;
+
 export const Link = styled(A)``;
 
 export const Logged = styled.div`

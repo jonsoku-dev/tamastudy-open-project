@@ -34,7 +34,7 @@ export class BoardRepository extends Repository<Board> {
         .where('board.category = :category', {
           category,
         })
-        // .loadRelationCountAndMap('board.likesCount', 'board.likes')
+        .loadRelationCountAndMap('board.likesCount', 'board.likes')
         .take(5)
         .getMany();
     } catch (e) {
@@ -51,7 +51,11 @@ export class BoardRepository extends Repository<Board> {
     cursorPaginationQueryDto: CursorPaginationQueryDto,
   ) {
     let limit = 10;
-    const query = this.createQueryBuilder('board');
+    const query = this.createQueryBuilder('board')
+      .select()
+      .leftJoinAndSelect('board.user', 'user')
+      .leftJoinAndSelect('board.comments', 'comments')
+      .leftJoinAndSelect('board.likes', 'likes');
     if (getBoardListFilterDto) {
       const { search, category } = getBoardListFilterDto;
       if (search) {
@@ -76,14 +80,9 @@ export class BoardRepository extends Repository<Board> {
     }
     try {
       let boards = await query
-        .leftJoinAndSelect('board.user', 'user')
-        .leftJoinAndSelect('board.likes', 'likes')
-        .leftJoinAndSelect('board.comments', 'comments')
         .take(limit + 1)
         .orderBy('board.id', 'DESC')
         .getMany();
-
-      this.logger.debug(boards.length);
 
       if (boards.length === 0) {
         return {

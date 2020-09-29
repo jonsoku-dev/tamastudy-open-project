@@ -13,7 +13,6 @@ import { ObjectType } from '@nestjs/graphql';
 import { Auth } from '../../auth/entities/auth.entity';
 import { Board } from './board.entity';
 import { BoardCommentInterface } from '../interface/board-comment.interface';
-import { BoardLike } from './board-like.entity';
 import { BoardCommentReply } from './board-comment-reply.entity';
 
 @ObjectType({

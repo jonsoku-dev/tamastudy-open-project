@@ -4,7 +4,6 @@ import Side from './organisms/Side/Side';
 import { LayoutProvider } from '../shared/menuHandler';
 import BackDrop from './molecules/BackDrop/BackDrop';
 import { Container, Contents } from './shared.styled';
-import Nav from './molecules/Nav/Nav';
 
 const BasicLayout = ({
   title,
@@ -24,9 +23,7 @@ const BasicLayout = ({
       <Container>
         <Header title={title} bg={bg} />
         <Contents isMain={isMain}>{children}</Contents>
-        <Nav bg={bg} />
       </Container>
-      {/*<Footer />*/}
     </LayoutProvider>
   );
 };

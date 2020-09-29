@@ -32,19 +32,25 @@ export const Content = styled.div`
   bottom: 0;
   background-color: rgba(255, 255, 255, 1);
   z-index: 30000;
-  display: grid;
-  grid-auto-rows: 80px;
-  overflow-y: scroll;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-  &::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera*/
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 export const Link = styled(A)`
   font-size: 2rem;
   text-decoration: none;
   padding: 32px;
-  color:inherit;
+  color: inherit;
+`;
+
+export const Common = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+export const Auth = styled.div`
+  display: flex;
+  a {
+    font-size: 1.4rem;
+  }
 `;

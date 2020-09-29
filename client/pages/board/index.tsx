@@ -31,6 +31,7 @@ const BoardList: React.FC<BoardListProps> = () => {
   const more = async () => {
     if (boardData?.getBoardList.edges.length !== 0) {
       const after = boardData?.getBoardList.pageInfo.endCursor;
+      console.log(after);
       if (boardData?.getBoardList.pageInfo.hasNextPage) {
         try {
           await fetchMore({

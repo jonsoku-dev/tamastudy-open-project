@@ -61,7 +61,7 @@ export class AuthRepository extends Repository<Auth> {
         })
         .execute();
       this.logger.verbose('follow success');
-      return 'follow success';
+      return await this.findOne({ where: { id: targetUserId } });
     } catch (e) {
       if (e.code === '23505') {
         this.logger.error('follow duplicate error');

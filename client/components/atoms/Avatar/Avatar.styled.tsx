@@ -16,5 +16,4 @@ export const Wrapper = styled.div<{ size: number; hasCursor: boolean }>`
     height: 100%;
     object-fit: fill;
   }
-  margin-right: 8px;
 `;

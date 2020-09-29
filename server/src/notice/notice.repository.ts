@@ -21,7 +21,7 @@ export class NoticeRepository extends Repository<Notice> {
     getNoticeListFilterDto: GetNoticeListFilterDto,
   ): Promise<GetNoticeListResponseDto[]> {
     try {
-      const query = this.createQueryBuilder('notice')
+      const query = this.createQueryBuilder('notice').select()
         .leftJoinAndSelect('notice.user', 'user')
       if (getNoticeListFilterDto) {
         const { search, limit, offset } = getNoticeListFilterDto;

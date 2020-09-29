@@ -21,9 +21,6 @@ export abstract class BoardInterface {
   @Field(() => BoardCategory)
   category: BoardCategory;
 
-  @Field(() => String)
-  filepath: string;
-
   @Field(() => Date)
   createdAt: Date;
 
@@ -39,6 +36,6 @@ export abstract class BoardInterface {
   @Field(() => [BoardLike])
   likes: BoardLike[];
 
-  @Field(() => Number, {defaultValue: 0})
-  likesCount?: number;
+  @Field(() => String)
+  filepath: string;
 }

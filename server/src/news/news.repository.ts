@@ -2,7 +2,6 @@ import { EntityRepository, Repository } from 'typeorm/index';
 import { News } from './news.entity';
 import { GetNewsListResponse } from './response/get-news-list.response';
 import { NotFoundException } from '@nestjs/common';
-import { NewsFlagFilter } from './filter/news-flag.filter';
 import { NewsFlagEnum } from './enum/news-flag.enum';
 
 @EntityRepository(News)
